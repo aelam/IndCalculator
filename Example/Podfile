@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'IndCalculator_Example' do
+  pod 'IndCalculator', :path => '../'
+
+  target 'IndCalculator_Tests' do
+    inherit! :search_paths
+
+    pod 'FBSnapshotTestCase'
+  end
+end
