@@ -18,14 +18,15 @@
   "platforms": {
     "ios": "7.0"
   },
-  "compiler_flags": "-fno-objc-arc",
+  "compiler_flags": "$(inherit) -fmodules -fcxx-modules",
+  "xcconfig": {
+    "GCC_INPUT_FILETYPE": "automatic",
+    "CLANG_CXX_LANGUAGE_STANDARD": "c++14"
+  },
   "subspecs": [
     {
       "name": "Ind",
       "source_files": "IndCalculator/Ind/**/*.{h,m,cpp}",
-      "xcconfig": {
-        "GCC_INPUT_FILETYPE": "sourcecode.cpp.objcpp"
-      },
       "private_header_files": "IndCalculator/Ind/**/*.{h}"
     },
     {

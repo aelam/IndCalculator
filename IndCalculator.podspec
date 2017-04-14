@@ -14,11 +14,11 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/aelam/IndCalculator.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '7.0'
-  s.compiler_flags = "-fmodules, -fcxx-modules"
+  s.compiler_flags = "$(inherit) -fmodules -fcxx-modules"
+  s.xcconfig = {'GCC_INPUT_FILETYPE' => 'automatic', 'CLANG_CXX_LANGUAGE_STANDARD' => 'c++14' }
 
   s.subspec 'Ind' do |ss|
       ss.source_files = 'IndCalculator/Ind/**/*.{h,m,cpp}'
-      ss.xcconfig = {'GCC_INPUT_FILETYPE' => 'sourcecode.cpp.objcpp' }
       ss.private_header_files = 'IndCalculator/Ind/**/*.{h}'
   end
 
