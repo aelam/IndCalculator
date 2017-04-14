@@ -1,42 +1,43 @@
-#
-# Be sure to run `pod lib lint IndCalculator.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'IndCalculator'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of IndCalculator.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'IndCalculator'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+    C++计算
+    OC桥接, 以及数据协议
                        DESC
 
   s.homepage         = 'https://github.com/aelam/IndCalculator'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'aelam' => 'wanglun02@gmail.com' }
   s.source           = { :git => 'https://github.com/aelam/IndCalculator.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '7.0'
+  s.compiler_flags = "-fmodules, -fcxx-modules"
 
-  s.source_files = 'IndCalculator/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'IndCalculator' => ['IndCalculator/Assets/*.png']
-  # }
+  s.subspec 'Ind' do |ss|
+      ss.source_files = 'IndCalculator/Ind/**/*.{h,m,cpp}'
+      ss.xcconfig = {'GCC_INPUT_FILETYPE' => 'sourcecode.cpp.objcpp' }
+      ss.private_header_files = 'IndCalculator/Ind/**/*.{h}'
+  end
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.subspec 'IndFactory' do |ss|
+      ss.source_files = 'IndCalculator/IndFactory/**/*.{h,m,cpp}'
+      ss.private_header_files = 'IndCalculator/IndFactory/**/*.{h}'
+      ss.dependency 'IndCalculator/Ind'
+  end
+
+  s.subspec 'OCBridge' do |ss|
+      ss.subspec 'Interface' do |sss|
+        sss.source_files = 'IndCalculator/OCBridge/Interface/**/*.{h,m,mm}'
+        sss.dependency 'IndCalculator/IndFactory'
+      end
+
+      ss.subspec 'Implementation' do |sss|
+        sss.source_files = 'IndCalculator/OCBridge/Implementation/**/*.{h,m,mm}'
+        sss.dependency 'IndCalculator/OCBridge/Interface'
+      end
+  end
+
 end

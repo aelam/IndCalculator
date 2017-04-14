@@ -6,6 +6,6 @@ target 'IndCalculator_Example' do
   target 'IndCalculator_Tests' do
     inherit! :search_paths
 
-    pod 'FBSnapshotTestCase'
+#    pod 'FBSnapshotTestCase'
   end
 end

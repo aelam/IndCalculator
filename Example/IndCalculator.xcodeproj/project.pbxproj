@@ -58,11 +58,11 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		6F477763EFA3B328A3C4835F /* IndCalculator.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = IndCalculator.podspec; path = ../IndCalculator.podspec; sourceTree = "<group>"; };
+		6F477763EFA3B328A3C4835F /* IndCalculator.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = IndCalculator.podspec; path = ../IndCalculator.podspec; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		843CD266950C70ED5A5F273B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		843CD266950C70ED5A5F273B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		96CD4C760490B90483ABED8F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		96CD4C760490B90483ABED8F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A077F561E94D31A934D480EC /* Pods_IndCalculator_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndCalculator_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B904580C7D4C1CD959EA3CAE /* Pods-IndCalculator_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndCalculator_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndCalculator_Tests/Pods-IndCalculator_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BD4058EEF84A39888690C3E5 /* Pods_IndCalculator_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndCalculator_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -251,6 +251,7 @@
 				ORGANIZATIONNAME = aelam;
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
+						LastSwiftMigration = 0830;
 						TestTargetID = 6003F589195388D20070C39A;
 					};
 				};
@@ -528,6 +529,13 @@
 				GCC_PREFIX_HEADER = "IndCalculator/IndCalculator-Prefix.pch";
 				INFOPLIST_FILE = "IndCalculator/IndCalculator-Info.plist";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"IndCalculator\"",
+					"-fcxx-modules",
+					"-fmodules",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -543,6 +551,13 @@
 				GCC_PREFIX_HEADER = "IndCalculator/IndCalculator-Prefix.pch";
 				INFOPLIST_FILE = "IndCalculator/IndCalculator-Info.plist";
 				MODULE_NAME = ExampleApp;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"IndCalculator\"",
+					"-fcxx-modules",
+					"-fmodules",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -568,6 +583,7 @@
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IndCalculator_Example.app/IndCalculator_Example";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -588,6 +604,7 @@
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IndCalculator_Example.app/IndCalculator_Example";
 				WRAPPER_EXTENSION = xctest;
 			};

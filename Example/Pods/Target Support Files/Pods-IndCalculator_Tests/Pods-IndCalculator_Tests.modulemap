@@ -1,0 +1,6 @@
+framework module Pods_IndCalculator_Tests {
+  umbrella header "Pods-IndCalculator_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

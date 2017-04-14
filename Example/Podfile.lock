@@ -1,0 +1,29 @@
+PODS:
+  - IndCalculator (0.1.0):
+    - IndCalculator/Ind (= 0.1.0)
+    - IndCalculator/IndFactory (= 0.1.0)
+    - IndCalculator/OCBridge (= 0.1.0)
+  - IndCalculator/Ind (0.1.0)
+  - IndCalculator/IndFactory (0.1.0):
+    - IndCalculator/Ind
+  - IndCalculator/OCBridge (0.1.0):
+    - IndCalculator/OCBridge/Implementation (= 0.1.0)
+    - IndCalculator/OCBridge/Interface (= 0.1.0)
+  - IndCalculator/OCBridge/Implementation (0.1.0):
+    - IndCalculator/OCBridge/Interface
+  - IndCalculator/OCBridge/Interface (0.1.0):
+    - IndCalculator/IndFactory
+
+DEPENDENCIES:
+  - IndCalculator (from `../`)
+
+EXTERNAL SOURCES:
+  IndCalculator:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  IndCalculator: 91b5bb19ae80d3fd106d3ac48df813119e4faad6
+
+PODFILE CHECKSUM: 18962eb6948939009dfd21574e1f2a273d4ab767
+
+COCOAPODS: 1.2.0

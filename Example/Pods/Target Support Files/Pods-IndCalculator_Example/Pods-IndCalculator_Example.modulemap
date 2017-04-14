@@ -1,0 +1,6 @@
+framework module Pods_IndCalculator_Example {
+  umbrella header "Pods-IndCalculator_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}
