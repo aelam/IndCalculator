@@ -3,6 +3,7 @@
 #endif
 
 #import "IndCalculator.h"
+#import "IndCandleStick.h"
 #import "IIndCalculator.h"
 #import "IIndCandleStick.h"
 #import "IIndDataSet.h"

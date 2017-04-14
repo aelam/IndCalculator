@@ -24,6 +24,8 @@
 		79200BC5BFAC611102824228 /* Pods_IndCalculator_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD4058EEF84A39888690C3E5 /* Pods_IndCalculator_Example.framework */; };
 		85CC342707A95024997B6FAD /* Pods_IndCalculator_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A077F561E94D31A934D480EC /* Pods_IndCalculator_Tests.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		94E500F41EA12B52007838D5 /* SKCandleDataBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 94E500F31EA12B52007838D5 /* SKCandleDataBuilder.m */; };
+		94E500F61EA13086007838D5 /* candle.json in Resources */ = {isa = PBXBuildFile; fileRef = 94E500F51EA12BB7007838D5 /* candle.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,9 @@
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		843CD266950C70ED5A5F273B /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		94E500F21EA12B52007838D5 /* SKCandleDataBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SKCandleDataBuilder.h; sourceTree = "<group>"; };
+		94E500F31EA12B52007838D5 /* SKCandleDataBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SKCandleDataBuilder.m; sourceTree = "<group>"; };
+		94E500F51EA12BB7007838D5 /* candle.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = candle.json; sourceTree = "<group>"; };
 		96CD4C760490B90483ABED8F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		A077F561E94D31A934D480EC /* Pods_IndCalculator_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IndCalculator_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B904580C7D4C1CD959EA3CAE /* Pods-IndCalculator_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IndCalculator_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IndCalculator_Tests/Pods-IndCalculator_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -134,6 +139,9 @@
 			children = (
 				6003F59C195388D20070C39A /* SKAppDelegate.h */,
 				6003F59D195388D20070C39A /* SKAppDelegate.m */,
+				94E500F21EA12B52007838D5 /* SKCandleDataBuilder.h */,
+				94E500F31EA12B52007838D5 /* SKCandleDataBuilder.m */,
+				94E500F51EA12BB7007838D5 /* candle.json */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* SKViewController.h */,
 				6003F5A6195388D20070C39A /* SKViewController.m */,
@@ -284,6 +292,7 @@
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
+				94E500F61EA13086007838D5 /* candle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,6 +406,7 @@
 			files = (
 				6003F59E195388D20070C39A /* SKAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* SKViewController.m in Sources */,
+				94E500F41EA12B52007838D5 /* SKCandleDataBuilder.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

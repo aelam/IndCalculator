@@ -11,9 +11,11 @@
 #import "ind.h"
 #import "Factory.h"
 #import "Registrar.h"
+#import "IndDataSet.h"
 
 @interface IndCalculator () {
-    CInd *_ind;
+    CInd     *_ind;
+    NSString *_name;
 }
 
 @end
@@ -32,6 +34,7 @@
     
     if (self = [super init]) {
         _ind = newInd;
+        _name = name;
     }
     return self;
 
@@ -52,11 +55,62 @@
 }
 
 - (NSArray *)calc:(NSArray<IIndCandleStick> *)items {
-    NSAssert(false, @"子类实现");
-    return nil;
+    NSInteger itemCount = items.count;
+    CFDayMobile *cppItems = [self sticksFromIIndCandleSticks:items];
+    _ind->Calc(cppItems, (int)itemCount);
+    
+    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:_params.count];
+    for (NSInteger dataGroupIndex = 0; dataGroupIndex < _params.count; dataGroupIndex++) {
+        NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
+        
+        NSInteger startIndex = _ind->m_pnFirst[dataGroupIndex];
+        for (NSInteger dataIndex = 0; dataIndex < itemCount; dataIndex++) {
+            CFDayMobile cppItem = cppItems[dataIndex];
+            double value = 0;
+            if ([_name isEqualToString:@"MA"]) {
+                value = cppItem.m_pfMA[dataGroupIndex];
+//            } else if ([_name isEqualToString:@"MA"]) {
+//                value = cppItem.m_pfVMA[dataGroupIndex];
+            } else {
+                value = cppItem.m_pfInd[dataGroupIndex];
+            }
+            
+            [values addObject:@(value)];
+        }
+        
+        IndDataSet *indDataSet = [[IndDataSet alloc] init];
+        indDataSet.startIndex = startIndex;
+        indDataSet.values = values;
+        
+        [results addObject:indDataSet];
+    }
+    
+    return results;
+}
+
+- (CFDayMobile *)sticksFromIIndCandleSticks:(NSArray<IIndCandleStick> *)items {
+    NSInteger count = items.count;
+    if (count == 0) {
+        return nil;
+    }
+    CFDayMobile *cppItems = (CFDayMobile *)malloc(sizeof(CFDayMobile) * count);
+    
+    for (NSInteger i = 0; i < count; i++) {
+        id<IIndCandleStick> item = items[i];
+        cppItems[i].m_fHigh = item.high;
+        cppItems[i].m_fOpen = item.open;
+        cppItems[i].m_fLow = item.low;
+        cppItems[i].m_fClose = item.close;
+        cppItems[i].m_fVolume = item.volume;
+    }
+    
+    return cppItems;
 }
 
 - (void)dealloc {
+    if (_ind) {
+        delete _ind;
+    }
 }
 
 @end

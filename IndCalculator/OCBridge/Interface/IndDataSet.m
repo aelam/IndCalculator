@@ -10,4 +10,8 @@
 
 @implementation IndDataSet
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"startIndex:%zd, values: %@", _startIndex, _values];
+}
+
 @end

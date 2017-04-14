@@ -8,25 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		13FBA10F1F491040692E094D55448EC7 /* Pods-IndCalculator_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318B10E0BB59508489CF59B770D9E5F /* Pods-IndCalculator_Example-dummy.m */; };
-		1BCAC80C3B59733136F8297B47A377A7 /* IIndCandleStick.h in Headers */ = {isa = PBXBuildFile; fileRef = FD821410D0059F0B2CEA6E0E047774EE /* IIndCandleStick.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		27AF14CE0B16C122DD4AA7CEA8BD2276 /* IIndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C75C835199E711E5533A1CA03D3A1E7 /* IIndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		507D7E9F2CD189F9F377BCB06DAB566A /* Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = C86621F893645F8E1B6A5A168DFC7C28 /* Factory.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		1B45E3B867CF0CB4D1BA57F3E4CEA270 /* IndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A3619FEEEBD6CAA804600055E9056C79 /* IndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		22A8DE567717A8D67FF88CED1E0280A9 /* IndDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D893A84FD2287D2BBB3C2DE86F944 /* IndDataSet.m */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
+		2D780D8FDF0C99C43E270EFB8047B46D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		3C4AD53A2F93B185CFAEC158952D28C3 /* IndCalculator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6746D482A45D4A865DF29F972EDE0D /* IndCalculator-dummy.m */; };
+		457F606486950FE71151F3A4B0AD51C1 /* ind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C5C4891CF52986704EF7C6654CB5EF7 /* ind.cpp */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
 		586D08006DF942FF51034826456EB0F6 /* Pods-IndCalculator_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 189B81A9F79B4D840B803B2E49F9CA53 /* Pods-IndCalculator_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		662809223986D1E4B15B711A237FF1AD /* IndCalculator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A4F2D986C79E88789DE08C91F7CE1E /* IndCalculator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		69AF4D48DD7A57AE7715495851524ECF /* IIndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D9991849DD3DAAF3AAAC7931C55900EF /* IIndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6CA2550CBF8E62C754A6B2F94B46063D /* IndCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = AC1A49B6B9E4610A62B2FAE4F1E7D02F /* IndCalculator.mm */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
 		711129C88B228AC1389830D5EA74C327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		85E11E4D33775F09A3FE34D4D20C10D9 /* Registrar.h in Headers */ = {isa = PBXBuildFile; fileRef = DF34554BAC787D65A14729E6B2577A26 /* Registrar.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		B1C58654C5EE33553260513EE38A45A8 /* IndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = ACA37F617C64220C5D4AC1B8A89A2340 /* IndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7D62293323EF934BE0BA3121ECE6338C /* IndCandleStick.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A4A7ED65EE7E35D2DA896282000025 /* IndCandleStick.m */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
+		7E249EDE193AFDB179883C09FF034CCF /* IndCandleStick.h in Headers */ = {isa = PBXBuildFile; fileRef = B21AF0C74782097BAE0C03BF87E83E96 /* IndCandleStick.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		849ED922A14195D874CFE9A08F84430C /* IIndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D9991849DD3DAAF3AAAC7931C55900EF /* IIndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90AA8A7B8463C59C993228BB35369DE7 /* ind.h in Headers */ = {isa = PBXBuildFile; fileRef = C7CC46D0B26BA7C040752BB770C4B5F6 /* ind.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9671714EA3550FE5D808255FD9C482D2 /* IIndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C75C835199E711E5533A1CA03D3A1E7 /* IIndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A5443755823F3C564876E59DC711B25C /* IndCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 444E0FCDB8D1E731FC333255BE35C8DC /* IndCalculator.mm */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
+		AE8B4144DD333AB90FF0B12743A99D2A /* IIndCandleStick.h in Headers */ = {isa = PBXBuildFile; fileRef = FD821410D0059F0B2CEA6E0E047774EE /* IIndCandleStick.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B5A2B0D7B8A54C912D3B5C96794357E6 /* IndCalculator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A4F2D986C79E88789DE08C91F7CE1E /* IndCalculator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3AF1BB972F3ADDED9C57CAD7E9A5759 /* Pods-IndCalculator_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E83DBCEB6A9826BECA6F7A37044AD0FD /* Pods-IndCalculator_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CC6CEE7D92E547D4A0B37DF7542D09AD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		D07F8BFCEF2FCCCAB2A66957BAF5C16C /* IndDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D893A84FD2287D2BBB3C2DE86F944 /* IndDataSet.m */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
-		D224B10897691D5A2F97FB3D3BCB8028 /* IndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A3619FEEEBD6CAA804600055E9056C79 /* IndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D7D183C769DD3579C3B965B7DB90A84E /* ind.h in Headers */ = {isa = PBXBuildFile; fileRef = C7CC46D0B26BA7C040752BB770C4B5F6 /* ind.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		D26267420071F4DED401C3D4ADAE24FD /* Registrar.h in Headers */ = {isa = PBXBuildFile; fileRef = DF34554BAC787D65A14729E6B2577A26 /* Registrar.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D879059550C58D8CBA7A87E3C02A2D6F /* Pods-IndCalculator_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69667ECF8D1729A7C36802E45BBBBC /* Pods-IndCalculator_Tests-dummy.m */; };
-		E118AF2F81FD6F63A037ECBBB91CB939 /* ind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C5C4891CF52986704EF7C6654CB5EF7 /* ind.cpp */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
-		F1819F8D2B36CCF026C0AE72BE4AB11E /* IndCalculator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6746D482A45D4A865DF29F972EDE0D /* IndCalculator-dummy.m */; };
+		EDD3ACC4CDFFD85443F80125BAEE5266 /* Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = C86621F893645F8E1B6A5A168DFC7C28 /* Factory.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F67259391C93EE98AB414B11D65A2957 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		FDA003F367BDFE150FEA01C3E81B17E7 /* IndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = CFAD24D1B05DFA0A9D9032F0B3942FEB /* IndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,7 +36,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = FD8F70139C4D38862554FD821C23BC7C;
+			remoteGlobalIDString = 88495DBF16ACEC6B624A5820F5D08A22;
 			remoteInfo = IndCalculator;
 		};
 /* End PBXContainerItemProxy section */
@@ -48,6 +50,7 @@
 		2B1D43AC7A9D478CFA4102F74627669B /* Pods-IndCalculator_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-IndCalculator_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		39616815E57459C70F48FAE7D8EB1515 /* Pods-IndCalculator_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndCalculator_Example.release.xcconfig"; sourceTree = "<group>"; };
 		40A4F2D986C79E88789DE08C91F7CE1E /* IndCalculator-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "IndCalculator-umbrella.h"; sourceTree = "<group>"; };
+		444E0FCDB8D1E731FC333255BE35C8DC /* IndCalculator.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = IndCalculator.mm; sourceTree = "<group>"; };
 		4C75C835199E711E5533A1CA03D3A1E7 /* IIndCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IIndCalculator.h; sourceTree = "<group>"; };
 		4E364649707E2D6495D0AF927E3E8B72 /* IndCalculator.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = IndCalculator.xcconfig; sourceTree = "<group>"; };
 		4F39B3B18A2B699FA69BCBA1101C0AD8 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -63,16 +66,17 @@
 		9C5C4891CF52986704EF7C6654CB5EF7 /* ind.cpp */ = {isa = PBXFileReference; includeInIndex = 1; path = ind.cpp; sourceTree = "<group>"; };
 		A18F56A01555D941ABD0926F98CD0904 /* Pods-IndCalculator_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndCalculator_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		A3619FEEEBD6CAA804600055E9056C79 /* IndDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IndDataSet.h; sourceTree = "<group>"; };
-		AC1A49B6B9E4610A62B2FAE4F1E7D02F /* IndCalculator.mm */ = {isa = PBXFileReference; includeInIndex = 1; path = IndCalculator.mm; sourceTree = "<group>"; };
-		ACA37F617C64220C5D4AC1B8A89A2340 /* IndCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IndCalculator.h; sourceTree = "<group>"; };
+		B21AF0C74782097BAE0C03BF87E83E96 /* IndCandleStick.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IndCandleStick.h; sourceTree = "<group>"; };
 		B67D79A75D19D7FE2CDF748F8F3A1F49 /* Pods-IndCalculator_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-IndCalculator_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BA9D893A84FD2287D2BBB3C2DE86F944 /* IndDataSet.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = IndDataSet.m; sourceTree = "<group>"; };
 		BE69667ECF8D1729A7C36802E45BBBBC /* Pods-IndCalculator_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-IndCalculator_Tests-dummy.m"; sourceTree = "<group>"; };
+		C4A4A7ED65EE7E35D2DA896282000025 /* IndCandleStick.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = IndCandleStick.m; sourceTree = "<group>"; };
 		C5880004A1DA5E83F7BC9385FBC03109 /* Pods-IndCalculator_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-IndCalculator_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		C68D28800F4FD5E42325C17201C730C9 /* Pods_IndCalculator_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_IndCalculator_Example.framework; path = "Pods-IndCalculator_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7CC46D0B26BA7C040752BB770C4B5F6 /* ind.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ind.h; sourceTree = "<group>"; };
 		C86621F893645F8E1B6A5A168DFC7C28 /* Factory.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = Factory.h; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		CFAD24D1B05DFA0A9D9032F0B3942FEB /* IndCalculator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IndCalculator.h; sourceTree = "<group>"; };
 		CFF197ED4C480A6A341C9F8116DDB770 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D540D65B90C08669AAA99A9B69CE2757 /* Pods-IndCalculator_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-IndCalculator_Tests.modulemap"; sourceTree = "<group>"; };
 		D9991849DD3DAAF3AAAC7931C55900EF /* IIndDataSet.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = IIndDataSet.h; sourceTree = "<group>"; };
@@ -85,19 +89,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A278FB3FAD67D7400DC377521D6122D4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2D780D8FDF0C99C43E270EFB8047B46D /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A64980EB8828EE89C43F56958901470F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				F67259391C93EE98AB414B11D65A2957 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F291ECAD80B4BBF329D5F40CB182535C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CC6CEE7D92E547D4A0B37DF7542D09AD /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,15 +124,6 @@
 			);
 			name = Ind;
 			path = Ind;
-			sourceTree = "<group>";
-		};
-		29DBE85541D79DF1AD915378F0E6B922 /* OCBridge */ = {
-			isa = PBXGroup;
-			children = (
-				AE65352706488FAEAF3161802360B01A /* Implementation */,
-			);
-			name = OCBridge;
-			path = OCBridge;
 			sourceTree = "<group>";
 		};
 		3528247A943FC7F2BDD11E6973E53E6C /* Implementation */ = {
@@ -155,6 +150,27 @@
 			);
 			name = "Pods-IndCalculator_Example";
 			path = "Target Support Files/Pods-IndCalculator_Example";
+			sourceTree = "<group>";
+		};
+		3D6F44CCC54E462FFF9BF7519031DD85 /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				CFAD24D1B05DFA0A9D9032F0B3942FEB /* IndCalculator.h */,
+				444E0FCDB8D1E731FC333255BE35C8DC /* IndCalculator.mm */,
+				B21AF0C74782097BAE0C03BF87E83E96 /* IndCandleStick.h */,
+				C4A4A7ED65EE7E35D2DA896282000025 /* IndCandleStick.m */,
+			);
+			name = Implementation;
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		43040B390D28DDA24812E6AD6CF0419D /* OCBridge */ = {
+			isa = PBXGroup;
+			children = (
+				3D6F44CCC54E462FFF9BF7519031DD85 /* Implementation */,
+			);
+			name = OCBridge;
+			path = OCBridge;
 			sourceTree = "<group>";
 		};
 		46A9F0DC40E53D017FAC0AA1D6FF88A5 /* IndFactory */ = {
@@ -258,7 +274,7 @@
 		9EC8FC62AE403A8872BB5ABBF0D67B3F /* IndCalculator */ = {
 			isa = PBXGroup;
 			children = (
-				29DBE85541D79DF1AD915378F0E6B922 /* OCBridge */,
+				43040B390D28DDA24812E6AD6CF0419D /* OCBridge */,
 			);
 			name = IndCalculator;
 			path = IndCalculator;
@@ -271,16 +287,6 @@
 				81044B8A773BBC04639FBA554C750B50 /* Interface */,
 			);
 			name = OCBridge;
-			sourceTree = "<group>";
-		};
-		AE65352706488FAEAF3161802360B01A /* Implementation */ = {
-			isa = PBXGroup;
-			children = (
-				ACA37F617C64220C5D4AC1B8A89A2340 /* IndCalculator.h */,
-				AC1A49B6B9E4610A62B2FAE4F1E7D02F /* IndCalculator.mm */,
-			);
-			name = Implementation;
-			path = Implementation;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -377,19 +383,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		444543B01A0D39B027E918C8F58A1B57 /* Headers */ = {
+		83628EAA4E9E8D1A7FC5B99A0D674C7D /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				507D7E9F2CD189F9F377BCB06DAB566A /* Factory.h in Headers */,
-				27AF14CE0B16C122DD4AA7CEA8BD2276 /* IIndCalculator.h in Headers */,
-				1BCAC80C3B59733136F8297B47A377A7 /* IIndCandleStick.h in Headers */,
-				69AF4D48DD7A57AE7715495851524ECF /* IIndDataSet.h in Headers */,
-				D7D183C769DD3579C3B965B7DB90A84E /* ind.h in Headers */,
-				662809223986D1E4B15B711A237FF1AD /* IndCalculator-umbrella.h in Headers */,
-				B1C58654C5EE33553260513EE38A45A8 /* IndCalculator.h in Headers */,
-				D224B10897691D5A2F97FB3D3BCB8028 /* IndDataSet.h in Headers */,
-				85E11E4D33775F09A3FE34D4D20C10D9 /* Registrar.h in Headers */,
+				EDD3ACC4CDFFD85443F80125BAEE5266 /* Factory.h in Headers */,
+				9671714EA3550FE5D808255FD9C482D2 /* IIndCalculator.h in Headers */,
+				AE8B4144DD333AB90FF0B12743A99D2A /* IIndCandleStick.h in Headers */,
+				849ED922A14195D874CFE9A08F84430C /* IIndDataSet.h in Headers */,
+				90AA8A7B8463C59C993228BB35369DE7 /* ind.h in Headers */,
+				B5A2B0D7B8A54C912D3B5C96794357E6 /* IndCalculator-umbrella.h in Headers */,
+				FDA003F367BDFE150FEA01C3E81B17E7 /* IndCalculator.h in Headers */,
+				7E249EDE193AFDB179883C09FF034CCF /* IndCandleStick.h in Headers */,
+				1B45E3B867CF0CB4D1BA57F3E4CEA270 /* IndDataSet.h in Headers */,
+				D26267420071F4DED401C3D4ADAE24FD /* Registrar.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +429,23 @@
 			productReference = C68D28800F4FD5E42325C17201C730C9 /* Pods_IndCalculator_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		88495DBF16ACEC6B624A5820F5D08A22 /* IndCalculator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B9A42CD8F3E366392D74728381088AB /* Build configuration list for PBXNativeTarget "IndCalculator" */;
+			buildPhases = (
+				09C148CB858236D24C1FE9AFD4120573 /* Sources */,
+				A278FB3FAD67D7400DC377521D6122D4 /* Frameworks */,
+				83628EAA4E9E8D1A7FC5B99A0D674C7D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IndCalculator;
+			productName = IndCalculator;
+			productReference = 7F97F472F0C230E5F16CDCE59788E860 /* IndCalculator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		F2FF9C7B76485EFAB6D9ABC365C8C56E /* Pods-IndCalculator_Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7BB2CDA6EDEF1E061E647AAB4B5B5375 /* Build configuration list for PBXNativeTarget "Pods-IndCalculator_Tests" */;
@@ -437,23 +461,6 @@
 			name = "Pods-IndCalculator_Tests";
 			productName = "Pods-IndCalculator_Tests";
 			productReference = 124DA1F2736D43664C1D534CCBB8720B /* Pods_IndCalculator_Tests.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		FD8F70139C4D38862554FD821C23BC7C /* IndCalculator */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F69397C7780DF7D2D149851DBD91E36D /* Build configuration list for PBXNativeTarget "IndCalculator" */;
-			buildPhases = (
-				E303155C7CE927BD5EE7B9BD518BA71A /* Sources */,
-				F291ECAD80B4BBF329D5F40CB182535C /* Frameworks */,
-				444543B01A0D39B027E918C8F58A1B57 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = IndCalculator;
-			productName = IndCalculator;
-			productReference = 7F97F472F0C230E5F16CDCE59788E860 /* IndCalculator.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -477,7 +484,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FD8F70139C4D38862554FD821C23BC7C /* IndCalculator */,
+				88495DBF16ACEC6B624A5820F5D08A22 /* IndCalculator */,
 				375EDAC4941721FE31EFAD23178630F9 /* Pods-IndCalculator_Example */,
 				F2FF9C7B76485EFAB6D9ABC365C8C56E /* Pods-IndCalculator_Tests */,
 			);
@@ -485,6 +492,18 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		09C148CB858236D24C1FE9AFD4120573 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				457F606486950FE71151F3A4B0AD51C1 /* ind.cpp in Sources */,
+				3C4AD53A2F93B185CFAEC158952D28C3 /* IndCalculator-dummy.m in Sources */,
+				A5443755823F3C564876E59DC711B25C /* IndCalculator.mm in Sources */,
+				7D62293323EF934BE0BA3121ECE6338C /* IndCandleStick.m in Sources */,
+				22A8DE567717A8D67FF88CED1E0280A9 /* IndDataSet.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		766ABAEB1C0E8F5AAFADC1768C8B48BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -501,30 +520,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E303155C7CE927BD5EE7B9BD518BA71A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E118AF2F81FD6F63A037ECBBB91CB939 /* ind.cpp in Sources */,
-				F1819F8D2B36CCF026C0AE72BE4AB11E /* IndCalculator-dummy.m in Sources */,
-				6CA2550CBF8E62C754A6B2F94B46063D /* IndCalculator.mm in Sources */,
-				D07F8BFCEF2FCCCAB2A66957BAF5C16C /* IndDataSet.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		8A658760595D5EA5FF37ECD41D179C10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = IndCalculator;
-			target = FD8F70139C4D38862554FD821C23BC7C /* IndCalculator */;
+			target = 88495DBF16ACEC6B624A5820F5D08A22 /* IndCalculator */;
 			targetProxy = F6E9F4DC012C6C0A42CE29A38B53524F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1CEABDFD64F88696993594FFC2274A53 /* Release */ = {
+		478AEE03A5B3B1B66C0A225F89147E5B /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E364649707E2D6495D0AF927E3E8B72 /* IndCalculator.xcconfig */;
 			buildSettings = {
@@ -709,37 +717,6 @@
 			};
 			name = Debug;
 		};
-		AE11D2930E1A821C090803E6087B4709 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E364649707E2D6495D0AF927E3E8B72 /* IndCalculator.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/IndCalculator/IndCalculator-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/IndCalculator/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/IndCalculator/IndCalculator.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = IndCalculator;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		CAADAE4BBFB2A290010E097B3A1805CE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 84D0A2B134892225AC501665F32463BF /* Pods-IndCalculator_Tests.release.xcconfig */;
@@ -774,6 +751,37 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		F06FBE8C142648568008D0367B9D1D7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E364649707E2D6495D0AF927E3E8B72 /* IndCalculator.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/IndCalculator/IndCalculator-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/IndCalculator/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/IndCalculator/IndCalculator.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = IndCalculator;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		F6E922ED80781B1AECA2B66ED09CD505 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -831,20 +839,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		7B9A42CD8F3E366392D74728381088AB /* Build configuration list for PBXNativeTarget "IndCalculator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F06FBE8C142648568008D0367B9D1D7E /* Debug */,
+				478AEE03A5B3B1B66C0A225F89147E5B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7BB2CDA6EDEF1E061E647AAB4B5B5375 /* Build configuration list for PBXNativeTarget "Pods-IndCalculator_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A17C2A0623C3088362283AFF89C4A9CB /* Debug */,
 				CAADAE4BBFB2A290010E097B3A1805CE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F69397C7780DF7D2D149851DBD91E36D /* Build configuration list for PBXNativeTarget "IndCalculator" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AE11D2930E1A821C090803E6087B4709 /* Debug */,
-				1CEABDFD64F88696993594FFC2274A53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
