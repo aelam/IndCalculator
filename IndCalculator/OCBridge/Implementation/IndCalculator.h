@@ -11,14 +11,16 @@
 
 @protocol IIndCandleStick;
 @protocol IIndCalculator;
+@class IndDataSet;
 
 @interface IndCalculator: NSObject <IIndCalculator>
 
 + (instancetype)calculatorWithIndName:(NSString *)name;
 
 @property (nonatomic, strong) NSArray<NSNumber *> *params;
+@property (nonatomic, readonly) NSString *indName;
 
-- (NSArray <IIndDataSet>*)calc:(NSArray<IIndCandleStick> *)items;
+- (NSArray<IndDataSet *> *)calc:(NSArray<IIndCandleStick> *)items;
 
 @end
 

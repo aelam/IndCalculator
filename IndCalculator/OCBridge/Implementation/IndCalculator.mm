@@ -54,6 +54,10 @@
     }
 }
 
+- (NSString *)indName {
+    return _name;
+}
+
 - (NSArray<IIndDataSet> *)calc:(NSArray<IIndCandleStick> *)items {
     NSInteger itemCount = items.count;
     CFDayMobile *cppItems = [self sticksFromIIndCandleSticks:items];
@@ -62,6 +66,7 @@
     NSMutableArray<IIndDataSet> *results = (NSMutableArray<IIndDataSet> *)[[NSMutableArray alloc] initWithCapacity:_ind->m_cExpSize];
     for (NSInteger dataGroupIndex = 0; dataGroupIndex < _ind->m_cExpSize; dataGroupIndex++) {
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
+        NSMutableArray *colors = [NSMutableArray arrayWithCapacity:itemCount];
         
         NSInteger startIndex = _ind->m_pnFirst[dataGroupIndex];
         for (NSInteger dataIndex = 0; dataIndex < itemCount; dataIndex++) {
@@ -69,19 +74,28 @@
             double value = 0;
             if ([_name isEqualToString:@"MA"]) {
                 value = cppItem.m_pfMA[dataGroupIndex];
-//            } else if ([_name isEqualToString:@"MA"]) {
-//                value = cppItem.m_pfVMA[dataGroupIndex];
+                [values addObject:@(value)];
+            } else if ([_name isEqualToString:@"VOL"]) {
+                value = cppItem.m_pfVMA[dataGroupIndex];
+                [values addObject:@(value)];
+            } else if ([_name isEqualToString:@"SAR"]) {
+                value = cppItem.m_pfInd[dataGroupIndex];
+                if (dataGroupIndex == 0) {
+                    [values addObject:@(value)];
+                } else {
+                    [colors addObject:@(value)];
+                }
             } else {
                 value = cppItem.m_pfInd[dataGroupIndex];
+                [values addObject:@(value)];
             }
-            
-            [values addObject:@(value)];
         }
         
         IndDataSet *indDataSet = [[IndDataSet alloc] init];
-        indDataSet.startIndex = startIndex;
+        indDataSet.beginIndex = startIndex;
         indDataSet.values = values;
-        
+        indDataSet.colors = colors;
+
         [results addObject:indDataSet];
     }
     

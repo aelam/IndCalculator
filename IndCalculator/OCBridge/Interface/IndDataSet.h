@@ -15,7 +15,8 @@
 
 @interface IndDataSet : NSObject <IIndDataSet>
 
-@property (nonatomic, assign) NSInteger startIndex;
+@property (nonatomic, assign) NSInteger beginIndex;
 @property (nonatomic, strong) NSArray<NSNumber *> *values;
+@property (nonatomic, strong) NSArray<NSNumber *> *colors;
 
 @end

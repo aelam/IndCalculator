@@ -11,11 +11,12 @@
 
 @protocol IIndCalculator;
 @protocol IIndDataSet;
+@class IndDataSet;
 
 @protocol IIndCalculator <NSObject>
 
 @property (nonatomic, strong) NSArray<NSNumber *> *params;
 
-- (NSArray<IIndDataSet>*)calc:(NSArray<IIndCandleStick> *)items;
+- (NSArray<IndDataSet *> *)calc:(NSArray<IIndCandleStick> *)items;
 
 @end

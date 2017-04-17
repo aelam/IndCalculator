@@ -2,15 +2,14 @@
 // Created by sam on 3/29/17.
 //
 
-#ifndef MYAPPLICATION_IND_H
-#define MYAPPLICATION_IND_H
+#ifndef __IND_H
+#define __IND_H
 
 #include <string.h>
 
 #define LOGD(...)   // 定义LOGD类型
 #define LogTrace(...)
 
-//const char* my_test();
 typedef unsigned int DWORD;
 #define ZeroMemory(a, b) memset(a, 0, b)
 
@@ -35,21 +34,9 @@ struct CFDayMobile
     double m_fVolume;
     double m_fAmount;
 
-//    DWORD	m_dwNumOfBuy;
-//    DWORD	m_dwNumOfSell;
-//
-//    double	m_fAmtOfBuy[3];
-//    double	m_fAmtOfSell[3];
-
-//    double	m_fVolOfBuy[3];
-//    double	m_fVolOfSell[3];
-
     double m_pfMA[6];
     double m_pfVMA[6];
-
     double m_pfInd[6];
-
-    char m_cCPX;
 };
 
 
@@ -81,7 +68,6 @@ public:
     CInd_MA();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
-
 
 class CInd_VMA : public CInd
 {
@@ -308,6 +294,6 @@ public:
 
 
 
-#endif //MYAPPLICATION_IND_H
+#endif //__IND_H
 
 
