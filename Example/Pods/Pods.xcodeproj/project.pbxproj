@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		13FBA10F1F491040692E094D55448EC7 /* Pods-IndCalculator_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6318B10E0BB59508489CF59B770D9E5F /* Pods-IndCalculator_Example-dummy.m */; };
 		1B45E3B867CF0CB4D1BA57F3E4CEA270 /* IndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = A3619FEEEBD6CAA804600055E9056C79 /* IndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		22A8DE567717A8D67FF88CED1E0280A9 /* IndDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D893A84FD2287D2BBB3C2DE86F944 /* IndDataSet.m */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
+		259D93A971AAA6BBCA7BF158640D4707 /* IndCandleStick.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A4A7ED65EE7E35D2DA896282000025 /* IndCandleStick.m */; };
 		2D780D8FDF0C99C43E270EFB8047B46D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		3C4AD53A2F93B185CFAEC158952D28C3 /* IndCalculator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6746D482A45D4A865DF29F972EDE0D /* IndCalculator-dummy.m */; };
-		457F606486950FE71151F3A4B0AD51C1 /* ind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C5C4891CF52986704EF7C6654CB5EF7 /* ind.cpp */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
 		586D08006DF942FF51034826456EB0F6 /* Pods-IndCalculator_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 189B81A9F79B4D840B803B2E49F9CA53 /* Pods-IndCalculator_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		711129C88B228AC1389830D5EA74C327 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		7D62293323EF934BE0BA3121ECE6338C /* IndCandleStick.m in Sources */ = {isa = PBXBuildFile; fileRef = C4A4A7ED65EE7E35D2DA896282000025 /* IndCandleStick.m */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
 		7E249EDE193AFDB179883C09FF034CCF /* IndCandleStick.h in Headers */ = {isa = PBXBuildFile; fileRef = B21AF0C74782097BAE0C03BF87E83E96 /* IndCandleStick.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		82085E22796F81B79279B3E6B0AAEDF3 /* IndCalculator-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C6746D482A45D4A865DF29F972EDE0D /* IndCalculator-dummy.m */; };
 		849ED922A14195D874CFE9A08F84430C /* IIndDataSet.h in Headers */ = {isa = PBXBuildFile; fileRef = D9991849DD3DAAF3AAAC7931C55900EF /* IIndDataSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90AA8A7B8463C59C993228BB35369DE7 /* ind.h in Headers */ = {isa = PBXBuildFile; fileRef = C7CC46D0B26BA7C040752BB770C4B5F6 /* ind.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9671714EA3550FE5D808255FD9C482D2 /* IIndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C75C835199E711E5533A1CA03D3A1E7 /* IIndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A5443755823F3C564876E59DC711B25C /* IndCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 444E0FCDB8D1E731FC333255BE35C8DC /* IndCalculator.mm */; settings = {COMPILER_FLAGS = "$(inherit) -fmodules -fcxx-modules"; }; };
+		9E47500BCB1B238C0649D3E35923DB85 /* IndDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9D893A84FD2287D2BBB3C2DE86F944 /* IndDataSet.m */; };
+		A6B5B94EF95A5C2F952388E27454AE4C /* IndCalculator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 444E0FCDB8D1E731FC333255BE35C8DC /* IndCalculator.mm */; };
 		AE8B4144DD333AB90FF0B12743A99D2A /* IIndCandleStick.h in Headers */ = {isa = PBXBuildFile; fileRef = FD821410D0059F0B2CEA6E0E047774EE /* IIndCandleStick.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B5A2B0D7B8A54C912D3B5C96794357E6 /* IndCalculator-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 40A4F2D986C79E88789DE08C91F7CE1E /* IndCalculator-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C3AF1BB972F3ADDED9C57CAD7E9A5759 /* Pods-IndCalculator_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E83DBCEB6A9826BECA6F7A37044AD0FD /* Pods-IndCalculator_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D26267420071F4DED401C3D4ADAE24FD /* Registrar.h in Headers */ = {isa = PBXBuildFile; fileRef = DF34554BAC787D65A14729E6B2577A26 /* Registrar.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		D879059550C58D8CBA7A87E3C02A2D6F /* Pods-IndCalculator_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69667ECF8D1729A7C36802E45BBBBC /* Pods-IndCalculator_Tests-dummy.m */; };
+		DD59EEE8DEB512C117C54E24439E3997 /* ind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C5C4891CF52986704EF7C6654CB5EF7 /* ind.cpp */; };
 		EDD3ACC4CDFFD85443F80125BAEE5266 /* Factory.h in Headers */ = {isa = PBXBuildFile; fileRef = C86621F893645F8E1B6A5A168DFC7C28 /* Factory.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		F67259391C93EE98AB414B11D65A2957 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		FDA003F367BDFE150FEA01C3E81B17E7 /* IndCalculator.h in Headers */ = {isa = PBXBuildFile; fileRef = CFAD24D1B05DFA0A9D9032F0B3942FEB /* IndCalculator.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -433,7 +433,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B9A42CD8F3E366392D74728381088AB /* Build configuration list for PBXNativeTarget "IndCalculator" */;
 			buildPhases = (
-				09C148CB858236D24C1FE9AFD4120573 /* Sources */,
+				3F38996CF5A2F8310BB3078A80D7DF76 /* Sources */,
 				A278FB3FAD67D7400DC377521D6122D4 /* Frameworks */,
 				83628EAA4E9E8D1A7FC5B99A0D674C7D /* Headers */,
 			);
@@ -492,15 +492,15 @@
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		09C148CB858236D24C1FE9AFD4120573 /* Sources */ = {
+		3F38996CF5A2F8310BB3078A80D7DF76 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				457F606486950FE71151F3A4B0AD51C1 /* ind.cpp in Sources */,
-				3C4AD53A2F93B185CFAEC158952D28C3 /* IndCalculator-dummy.m in Sources */,
-				A5443755823F3C564876E59DC711B25C /* IndCalculator.mm in Sources */,
-				7D62293323EF934BE0BA3121ECE6338C /* IndCandleStick.m in Sources */,
-				22A8DE567717A8D67FF88CED1E0280A9 /* IndDataSet.m in Sources */,
+				DD59EEE8DEB512C117C54E24439E3997 /* ind.cpp in Sources */,
+				82085E22796F81B79279B3E6B0AAEDF3 /* IndCalculator-dummy.m in Sources */,
+				A6B5B94EF95A5C2F952388E27454AE4C /* IndCalculator.mm in Sources */,
+				259D93A971AAA6BBCA7BF158640D4707 /* IndCandleStick.m in Sources */,
+				9E47500BCB1B238C0649D3E35923DB85 /* IndDataSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
