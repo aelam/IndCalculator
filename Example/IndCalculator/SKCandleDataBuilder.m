@@ -7,6 +7,7 @@
 //
 
 #import "SKCandleDataBuilder.h"
+#import "IIndCandleStick.h"
 
 @implementation SKCandleDataBuilder
 
@@ -14,7 +15,7 @@
     NSString * path = [[NSBundle mainBundle] pathForResource:@"candle" ofType:@"json"];
     NSData *data = [[NSData alloc] initWithContentsOfFile:path];
     NSArray *candleNumbers = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    NSMutableArray *candles = [NSMutableArray array];
+    NSMutableArray <IIndCandleStick> *candles = (NSMutableArray <IIndCandleStick> *)[NSMutableArray array];
     for (NSArray *numbers in candleNumbers) {
         IndCandleStick *stick = [[IndCandleStick alloc] init];
         stick.high = [numbers[0] doubleValue];

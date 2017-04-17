@@ -15,9 +15,10 @@
 @interface IndCalculator: NSObject <IIndCalculator>
 
 + (instancetype)calculatorWithIndName:(NSString *)name;
+
 @property (nonatomic, strong) NSArray<NSNumber *> *params;
 
-- (NSArray *)calc:(NSArray<IIndCandleStick> *)items;
+- (NSArray <IIndDataSet>*)calc:(NSArray<IIndCandleStick> *)items;
 
 @end
 

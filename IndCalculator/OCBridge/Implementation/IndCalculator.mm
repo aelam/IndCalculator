@@ -54,13 +54,13 @@
     }
 }
 
-- (NSArray *)calc:(NSArray<IIndCandleStick> *)items {
+- (NSArray<IIndDataSet> *)calc:(NSArray<IIndCandleStick> *)items {
     NSInteger itemCount = items.count;
     CFDayMobile *cppItems = [self sticksFromIIndCandleSticks:items];
     _ind->Calc(cppItems, (int)itemCount);
     
-    NSMutableArray *results = [[NSMutableArray alloc] initWithCapacity:_params.count];
-    for (NSInteger dataGroupIndex = 0; dataGroupIndex < _params.count; dataGroupIndex++) {
+    NSMutableArray<IIndDataSet> *results = (NSMutableArray<IIndDataSet> *)[[NSMutableArray alloc] initWithCapacity:_ind->m_cExpSize];
+    for (NSInteger dataGroupIndex = 0; dataGroupIndex < _ind->m_cExpSize; dataGroupIndex++) {
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
         
         NSInteger startIndex = _ind->m_pnFirst[dataGroupIndex];
