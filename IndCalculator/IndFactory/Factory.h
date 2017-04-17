@@ -34,7 +34,8 @@ public:
     {
         if(map_.find(key) == map_.end())
         {
-            throw std::invalid_argument("the message key is not exist!");
+            //throw std::invalid_argument("the message key is not exist!");
+            return nil;
         }
         return map_[key](); //注意lambda在这里执行
     }
