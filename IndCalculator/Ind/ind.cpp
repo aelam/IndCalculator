@@ -11,52 +11,66 @@
 #define Max(a,b) (((a)>(b))?(a):(b))
 #define Min(a,b) (((a)<(b))?(a):(b))
 
-
-#ifndef bool
 typedef bool BOOL;
-#endif
-// consts
-#ifndef TRUE
-#define TRUE	true
-#endif
 
-#ifndef FALSE
+// consts
+#define TRUE	true
 #define FALSE	false
-#endif
 
 #define EPS (1e-5)
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+void Cal_VMAColor(CFDayMobile* pDay, int nDay) {
+    if (pDay == NULL || nDay <= 0) return;
+    for (int i = 0; i < nDay; i++) {
+        CFDayMobile candle = pDay[i];
+        if (candle.m_fClose > candle.m_fOpen) {
+            pDay[i].m_color = LineColorIncreasing;
+        } else if (candle.m_fClose < candle.m_fOpen) {
+            pDay[i].m_color = LineColorDecreasing;
+        } else {
+            if (i >= 1) {
+                CFDayMobile preCandle = pDay[i-1];
+                if (candle.m_fClose >= preCandle.m_fClose) {
+                    pDay[i].m_color = LineColorIncreasing;
+                } else {
+                    pDay[i].m_color = LineColorDecreasing;
+                }
+                
+            } else {
+                pDay[i].m_color = LineColorIncreasing;
+            }
+        }
+    }
+}
 
 void Calc_MA(double* pfMA, CFDayMobile* pDay, int nDay, short sParam)
 {
     if (pDay == NULL || nDay <= 0) return;
 
-    for (int i=0; i<nDay; i++)
+    for (int i = 0; i<nDay; i++)
     {
-        if (i<sParam-1)
-            pfMA[i]=pDay[i].m_fClose;
+        if (i < sParam - 1)
+            pfMA[i] = __NAN;
         else
         {
             pfMA[i] = 0;
-            for (int j=i-sParam+1; j<=i; j++)
+            for (int j=i-sParam+1; j<=i; j++) {
                 pfMA[i] += pDay[j].m_fClose;
+            }
             pfMA[i] /= sParam;
         }
     }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static void Calc_EMA(double* pfEMA, double* pfValue, int nValue, short sParam)
+void Calc_EMA(double* pfEMA, double* pfValue, int nValue, short sParam)
 {
     LogTrace("%s", __FUNCTION__);
     if (pfEMA && pfValue && nValue>0 && sParam>0)
     {
         pfEMA[0] = pfValue[0];
-        for (int i=1; i<nValue; i++)
-            pfEMA[i] = (pfEMA[i-1]*(sParam-1)+pfValue[i]*2)/(sParam+1);
+        for (int i = 1; i < nValue; i++)
+            pfEMA[i] = (pfEMA[i-1] * (sParam-1) + pfValue[i] * 2) / (sParam + 1);
     }
 }
 
@@ -236,10 +250,12 @@ void Calc_SUM(double* pfSum, double* pfValue, int nValue, short sParam, int nSta
 CInd::CInd()
 {
     m_cParamSize = 0;
-    ZeroMemory(m_psParam, 6*sizeof(short));
+    ZeroMemory(m_psParam, 7*sizeof(short));
 
     m_cExpSize = 0;
-    ZeroMemory(m_pnFirst, 6*sizeof(int));
+    ZeroMemory(m_pnFirst, 7*sizeof(int));
+    
+    m_coloredIndIndex = -1;  
 }
 
 void CInd::Calc(CFDayMobile* pFDay, int nNum)
@@ -267,7 +283,6 @@ void CInd_MA::Calc(CFDayMobile* pFDay, int nNum)
 {
     LOGD("%s", __FUNCTION__);
 
-    //ASSERT(m_cParamSize<=6);
     m_cExpSize = m_cParamSize;
 
     if (pFDay == NULL || nNum <= 0) return;
@@ -282,16 +297,16 @@ void CInd_MA::Calc(CFDayMobile* pFDay, int nNum)
 
         for (int i=0; i<nNum; i++)
         {
-            if (i<m_pnFirst[c])
-                pFDay[i].m_pfMA[c] = pFDay[i].m_fClose;
-            else if (sParam<2)
-                pFDay[i].m_pfMA[c] = pFDay[i].m_fClose;
+            if (i < m_pnFirst[c])
+                pFDay[i].m_pfInd[c] = __NAN;
+            else if (sParam < 2)
+                pFDay[i].m_pfInd[c] = __NAN;
             else
             {
-                pFDay[i].m_pfMA[c] = 0;
-                for (int j=i-sParam+1; j<=i; j++)
-                    pFDay[i].m_pfMA[c] += pFDay[j].m_fClose;
-                pFDay[i].m_pfMA[c] /= sParam;
+                pFDay[i].m_pfInd[c] = 0;
+                for (int j= i- sParam + 1; j<=i; j++)
+                    pFDay[i].m_pfInd[c] += pFDay[j].m_fClose;
+                pFDay[i].m_pfInd[c] /= sParam;
             }
         }
     }
@@ -313,44 +328,45 @@ void CInd_VMA::Calc(CFDayMobile* pFDay, int nNum)
     LogTrace("%s", __FUNCTION__);
 
     //ASSERT(m_cParamSize<=5);
-    m_cExpSize = m_cParamSize+1;
-
+    m_cExpSize = m_cParamSize + 1;
+    m_coloredIndIndex = 0;
+    
     if (pFDay == NULL || nNum <= 0) return;
 
     for (int c=0; c<m_cParamSize+1; c++)
     {
-        if (c==0)
+        if (c == 0)
         {
             m_pnFirst[c] = 0;
-            for (int i=0; i<nNum; i++)
+            for (int i = 0; i<nNum; i++)
             {
-                pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c] = pFDay[i].m_fVolume;
+                pFDay[i].m_pfInd[c] = pFDay[i].m_fVolume;
             }
+            
+            Cal_VMAColor(pFDay, nNum);
         }
         else
         {
             short sParam = m_psParam[c-1];
-            if (sParam<1)
+            if (sParam < 1)
                 sParam = 1;
 
             m_pnFirst[c] = int(sParam-1);
 
-            for (int i=0; i<nNum; i++)
+            for (int i = 0; i<nNum; i++)
             {
-                if (i<m_pnFirst[c])
-                    pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c] = pFDay[i].m_fVolume;
-                else if (sParam<m_cParamSize)
-                    pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c] = pFDay[i].m_fVolume;
+                if (i < m_pnFirst[c])
+                    pFDay[i].m_pfInd[c] = __NAN;
+                else if (sParam < m_cParamSize)
+                    pFDay[i].m_pfInd[c] = __NAN;
                 else
                 {
-                    pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c] = 0;
+                    pFDay[i].m_pfInd[c] = pFDay[i].m_pfInd[c] = 0;
                     for (int j=i-sParam+1; j<=i; j++)
                     {
                         pFDay[i].m_pfInd[c] += pFDay[j].m_fVolume;
-                        pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c];
                     }
                     pFDay[i].m_pfInd[c] /= sParam;
-                    pFDay[i].m_pfVMA[c] = pFDay[i].m_pfInd[c];
                 }
             }
         }
@@ -482,7 +498,7 @@ void CInd_RSI::Calc(CFDayMobile* pFDay, int nNum)
 
     if (pfMax && pfAbs && pfMaxSMA && pfAbsSMA)
     {
-        for (int c=0; c<m_cParamSize; c++)
+        for (int c = 0; c < m_cParamSize; c++)
         {
             int nN = m_psParam[c];
 
@@ -506,10 +522,10 @@ void CInd_RSI::Calc(CFDayMobile* pFDay, int nNum)
             m_pnFirst[c] = 1;
             for (int i=1; i<nNum; i++)
             {
-                if (pfAbsSMA[i]!=0)
-                    pFDay[i].m_pfInd[c] = pfMaxSMA[i]/pfAbsSMA[i]*100;
-                else if (i==1)
-                    pFDay[i].m_pfInd[c] = 0;
+                if (pfAbsSMA[i] != 0)
+                    pFDay[i].m_pfInd[c] = pfMaxSMA[i]/pfAbsSMA[i] * 100;
+                else if (i == 1)
+                    pFDay[i].m_pfInd[c] = __NAN;
                 else
                     pFDay[i].m_pfInd[c] = pFDay[i-1].m_pfInd[c];
             }
@@ -713,7 +729,7 @@ void CInd_DMI::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i<nM)
-            pFDay[i].m_pfInd[2] = pFDay[i].m_pfInd[3];
+            pFDay[i].m_pfInd[2] = __NAN; //pFDay[i].m_pfInd[3];
         else
         {
             pFDay[i].m_pfInd[2] = 0;
@@ -726,7 +742,7 @@ void CInd_DMI::Calc(CFDayMobile* pFDay, int nNum)
     for (int i = 0; i < nNum; i++)
     {
         if (i < nM)
-            pFDay[i].m_pfInd[3] = pFDay[i].m_pfInd[2];
+            pFDay[i].m_pfInd[3] = __NAN; //pFDay[i].m_pfInd[2];
         else
             pFDay[i].m_pfInd[3] = (pFDay[i].m_pfInd[2] + pFDay[i-nM].m_pfInd[2]) / 2;
     }
@@ -759,7 +775,7 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
     if (nM < 1) nM = 1;
     if (nM > 300) nM = 300;
 
-    m_pnFirst[0] = nLong-1;
+    m_pnFirst[0] = nLong - 1;
     m_pnFirst[1] = nLong + nM -2;
 
     if (nNum < nLong) return;
@@ -767,7 +783,7 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nShort-1)
-            pFDay[i].m_pfInd[0] = 0.0;//pFDay[i].m_fClose;
+            pFDay[i].m_pfInd[0] = __NAN;//pFDay[i].m_fClose;
         else
         {
             pFDay[i].m_pfInd[0] = 0.0;
@@ -781,8 +797,8 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
 
     for (int i=0; i<nNum; i++)
     {
-        if (i < nLong-1)
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[i].m_fClose;
+        if (i < nLong - 1)
+            pFDay[i].m_pfInd[1] = __NAN;//pFDay[i].m_fClose;
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -795,7 +811,7 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[0] = 0.0;
+            pFDay[i].m_pfInd[0] = __NAN;
         else
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[0] - pFDay[i].m_pfInd[1];
     }
@@ -803,7 +819,7 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[1])
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[0].m_pfInd[0];
+            pFDay[i].m_pfInd[1] = __NAN;//pFDay[0].m_pfInd[0];
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -838,7 +854,7 @@ void CInd_TRIX::Calc(CFDayMobile* pFDay, int nNum)
 
     m_pnFirst[0] = 1;
     m_pnFirst[1] = nM;
-
+    
     pFDay[0].m_pfInd[1] = pFDay[0].m_fClose;
     for (int i=1; i<nNum; i++)
         pFDay[i].m_pfInd[1] = (pFDay[i-1].m_pfInd[1] *(nN-1)+pFDay[i].m_fClose*2)/(nN+1);
@@ -851,15 +867,14 @@ void CInd_TRIX::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=1; i<nNum; i++)
         pFDay[i].m_pfInd[1] = (pFDay[i-1].m_pfInd[1] *(nN-1)+pFDay[i].m_pfInd[0]*2)/(nN+1);
 
-
-    pFDay[0].m_pfInd[0] = 0.0;//pFDay[0].m_pfInd[1];
+    pFDay[0].m_pfInd[0] = __NAN;//pFDay[0].m_pfInd[1];
     for (int i=1; i<nNum; i++)
         pFDay[i].m_pfInd[0] = (pFDay[i].m_pfInd[1] - pFDay[i-1].m_pfInd[1])/pFDay[i-1].m_pfInd[1]*100;
 
     for (int i=0; i<nNum; i++)
     {
         if (i < nM)
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[i].m_pfInd[0];
+            pFDay[i].m_pfInd[1] = __NAN;//pFDay[i].m_pfInd[0];
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -898,7 +913,7 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
     {
         if (i < nN-1)
         {
-            pFDay[i].m_pfInd[0] = 0.0;
+            //pFDay[i].m_pfInd[0] = 0.0;
             pFDay[i].m_pfInd[2] = 0.0;//pFDay[i].m_fHigh - pFDay[i].m_fOpen;
             pFDay[i].m_pfInd[3] = 0.0;//pFDay[i].m_fOpen - pFDay[i].m_fLow;
             for (int j=0; j<=i; j++)
@@ -906,12 +921,15 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
                 pFDay[i].m_pfInd[2] += (pFDay[j].m_fHigh - pFDay[j].m_fOpen);
                 pFDay[i].m_pfInd[3] += (pFDay[j].m_fOpen - pFDay[j].m_fLow);
             }
-
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[2] / pFDay[i].m_pfInd[3] * 100;
+            
+            if isinf(pFDay[i].m_pfInd[0]) {
+                pFDay[i].m_pfInd[0] = __NAN;
+            }
         }
         else
         {
-            pFDay[i].m_pfInd[0] = 0.0;
+            //pFDay[i].m_pfInd[0] = 0.0;
             pFDay[i].m_pfInd[2] = 0.0;
             pFDay[i].m_pfInd[3] = 0.0;
             for (int j=i-nN+1; j<=i; j++)
@@ -921,6 +939,9 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
             }
 
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[2] / pFDay[i].m_pfInd[3] * 100;
+            if isinf(pFDay[i].m_pfInd[0]) {
+                pFDay[i].m_pfInd[0] = __NAN;
+            }
         }
     }
 
@@ -937,9 +958,14 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
                 pFDay[i].m_pfInd[3] += Max(0.0, pFDay[j-1].m_fClose - pFDay[j].m_fLow);
             }
             if(i == 0)
-                pFDay[i].m_pfInd[1] = 0;
+                pFDay[i].m_pfInd[1] = __NAN;
             else
                 pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[2] / pFDay[i].m_pfInd[3] * 100;
+            
+            if isinf(pFDay[i].m_pfInd[1]) {
+                pFDay[i].m_pfInd[1] = __NAN;
+            }
+
         }
         else
         {
@@ -953,6 +979,10 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
             }
 
             pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[2] / pFDay[i].m_pfInd[3] * 100;
+            
+            if isinf(pFDay[i].m_pfInd[1]) {
+                pFDay[i].m_pfInd[1] = __NAN;
+            }
         }
     }
 }
@@ -1138,11 +1168,13 @@ void CInd_OBV::Calc(CFDayMobile* pFDay, int nNum)
 
     for (int i=0; i<nNum; i++)
     {
-        pFDay[i].m_pfInd[0] = 0.0;
-        if (i < 1)
-            pFDay[i].m_pfInd[0] = 0.0;//pFDay[i].m_pfInd[1];
-        else
+        if (i == 0)
+            pFDay[i].m_pfInd[0] = __NAN;//pFDay[i].m_pfInd[1];
+        else if (i == 1) {
+            pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1];
+        } else {
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1] + pFDay[i-1].m_pfInd[0];
+        }
     }
 }
 
@@ -1185,11 +1217,13 @@ void CInd_ASI::Calc(CFDayMobile* pFDay, int nNum)
 
     for (int i=0; i<nNum; i++)
     {
-        pFDay[i].m_pfInd[0] = 0.0;
-        if (i < 1)
-            pFDay[i].m_pfInd[0] = 0.0;//pFDay[i].m_pfInd[1];
-        else
+        if (i == 0)
+            pFDay[i].m_pfInd[0] = __NAN;//pFDay[i].m_pfInd[1];
+        else if (i == 1) {
+            pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1];
+        } else {
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1] + pFDay[i-1].m_pfInd[0];
+        }
     }
 }
 
@@ -1250,13 +1284,18 @@ void CInd_EMV::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=1; i<nNum; i++)
         pFDay[i].m_pfInd[2] = (pFDay[i-1].m_pfInd[2]*(250-1)+pFDay[i].m_fVolume*2)/(250+1);
 
-    for (int i=0; i<nNum; i++)
-        pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1] * pFDay[i].m_pfInd[2];
-
+    for (int i=0; i<nNum; i++) {
+        if (i < m_pnFirst[0]) {
+            pFDay[i].m_pfInd[0] = __NAN;//pFDay[i].m_pfInd[0];
+        } else {
+            pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[1] * pFDay[i].m_pfInd[2];
+        }
+    }
+    
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[1])
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[i].m_pfInd[0];
+            pFDay[i].m_pfInd[1] = __NAN;//pFDay[i].m_pfInd[0];
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -1307,7 +1346,7 @@ void CInd_CCI::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[i].m_pfInd[0];
+            pFDay[i].m_pfInd[1] = 0;//pFDay[i].m_pfInd[0];
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -1319,9 +1358,11 @@ void CInd_CCI::Calc(CFDayMobile* pFDay, int nNum)
 
     for (int i=0; i<nNum; i++)
     {
-        pFDay[i].m_pfInd[0] = 0.0;
-        if (i < m_pnFirst[0]) continue;
-        pFDay[i].m_pfInd[0] = (pFDay[i].m_pfInd[3] - pFDay[i].m_pfInd[2]) / (0.015 * pFDay[i].m_pfInd[1]);
+        if (i < m_pnFirst[0]) {
+            pFDay[i].m_pfInd[0] = __NAN;
+        } else {
+            pFDay[i].m_pfInd[0] = (pFDay[i].m_pfInd[3] - pFDay[i].m_pfInd[2]) / (0.015 * pFDay[i].m_pfInd[1]);
+        }
     }
 }
 
@@ -1355,7 +1396,7 @@ void CInd_ROC::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[0] = 0.0;
+            pFDay[i].m_pfInd[0] = __NAN;
         else
             pFDay[i].m_pfInd[0] = (pFDay[i].m_fClose - pFDay[i-nN].m_fClose) / pFDay[i-nN].m_fClose * 100;
     }
@@ -1363,7 +1404,7 @@ void CInd_ROC::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[1])
-            pFDay[i].m_pfInd[1] = 0.0;//pFDay[i].m_pfInd[0];
+            pFDay[i].m_pfInd[1] = __NAN;//pFDay[i].m_pfInd[0];
         else
         {
             pFDay[i].m_pfInd[1] = 0.0;
@@ -1404,20 +1445,21 @@ void CInd_MTM::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[0] = 0.0;
+            pFDay[i].m_pfInd[0] = __NAN;
         else
             pFDay[i].m_pfInd[0] = pFDay[i].m_fClose - pFDay[i-nN].m_fClose;
     }
 
     for (int i=0; i<nNum; i++)
     {
-        pFDay[i].m_pfInd[1] = 0.0;
-        if (i < m_pnFirst[1]) continue;
-
-        pFDay[i].m_pfInd[1] = 0.0;
-        for (int j=i-nM+1; j<=i; j++)
-            pFDay[i].m_pfInd[1] += pFDay[j].m_pfInd[0];
-        pFDay[i].m_pfInd[1] /= nM;
+        if (i < m_pnFirst[1]) {
+            pFDay[i].m_pfInd[1] = __NAN;
+        } else {
+            pFDay[i].m_pfInd[1] = 0.0;
+            for (int j=i-nM+1; j<=i; j++)
+                pFDay[i].m_pfInd[1] += pFDay[j].m_pfInd[0];
+            pFDay[i].m_pfInd[1] /= nM;
+        }
     }
 }
 
@@ -1467,6 +1509,9 @@ void CInd_PSY::Calc(CFDayMobile* pFDay, int nNum)
             pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[0] / nN * 100;
         }
     }
+    
+    pFDay[0].m_pfInd[0] = __NAN;
+
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -1497,7 +1542,7 @@ void CInd_BOLL::Calc(CFDayMobile* pFDay, int nNum)
     for (int i = 0; i < nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[0] = 0.0;
+            pFDay[i].m_pfInd[0] = __NAN;
         else
         {
             pFDay[i].m_pfInd[0] = 0.0;
@@ -1510,7 +1555,7 @@ void CInd_BOLL::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[3] = 0.0;
+            pFDay[i].m_pfInd[3] = __NAN;
         else
         {
             pFDay[i].m_pfInd[3] = 0.0;
@@ -1520,18 +1565,18 @@ void CInd_BOLL::Calc(CFDayMobile* pFDay, int nNum)
         }
     }
 
-    for (int i=0; i<nNum; i++)
+    for (int i = 0; i < nNum; i++)
     {
-        if (i < m_pnFirst[0])
-            pFDay[i].m_pfInd[3] = 0.0;
-        else
+        if (i < m_pnFirst[0]) {
+            pFDay[i].m_pfInd[0] = __NAN;
+            pFDay[i].m_pfInd[1] = __NAN;
+            pFDay[i].m_pfInd[2] = __NAN;
+            pFDay[i].m_pfInd[3] = __NAN;
+        } else {
             pFDay[i].m_pfInd[3] = sqrt(pFDay[i].m_pfInd[3] * nN / (nN - 1));
-    }
-
-    for (int i=0; i<nNum; i++)
-    {
-        pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[0] + nP / 10 * pFDay[i].m_pfInd[3];
-        pFDay[i].m_pfInd[2] = pFDay[i].m_pfInd[0] - nP / 10 * pFDay[i].m_pfInd[3];
+            pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[0] + nP / 10 * pFDay[i].m_pfInd[3];
+            pFDay[i].m_pfInd[2] = pFDay[i].m_pfInd[0] - nP / 10 * pFDay[i].m_pfInd[3];
+        }
     }
 }
 
@@ -1549,7 +1594,8 @@ void CInd_SAR::Calc(CFDayMobile* pFDay, int nNum)
 {
     //ASSERT(m_cParamSize == 3);
     m_cExpSize = 1;
-
+    m_coloredIndIndex = 0;
+    
     if (pFDay == NULL || nNum <= 0) return;
 
     int nN = m_psParam[0];//def 10
@@ -1614,20 +1660,25 @@ void CInd_SAR::Calc(CFDayMobile* pFDay, int nNum)
             fMaxHigh = pFDay[n].m_fHigh;
         if(pFDay[n].m_fLow > 0 && pFDay[n].m_fLow < fMinLow)
             fMinLow = pFDay[n].m_fLow;
+        
+        pFDay[n].m_pfInd[0] = __NAN;
+        pFDay[n].m_pfInd[1] = __NAN;
+        pFDay[n].m_color = __NAN;
     }
 
     if(bSARUp)
     {
         pFDay[m_pnFirst[0]].m_pfInd[0] = fMinLow;
         pFDay[m_pnFirst[0]].m_pfInd[2] = 1;
-        pFDay[m_pnFirst[0]].m_pfInd[1] = 0;
     }
     else
     {
         pFDay[m_pnFirst[0]].m_pfInd[0] = fMaxHigh;
         pFDay[m_pnFirst[0]].m_pfInd[2] = -1;
-        pFDay[m_pnFirst[0]].m_pfInd[1] = 0;
     }
+    
+    pFDay[m_pnFirst[0]].m_pfInd[1] = 0;
+    pFDay[m_pnFirst[0]].m_color = 0;
 
     for(int n = nN+1; n < nNum; n++)
     {
@@ -1687,6 +1738,8 @@ void CInd_SAR::Calc(CFDayMobile* pFDay, int nNum)
                 pFDay[n].m_pfInd[1] = -1;
             }
         }
+        
+        pFDay[n].m_color = pFDay[n].m_pfInd[1];
     }
 }
 
@@ -1954,5 +2007,3 @@ void CInd_BIAS::Calc(CFDayMobile* pFDay, int nNum)
         delete [] pfMA_Close3;
 
 }
-
-

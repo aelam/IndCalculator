@@ -13,14 +13,20 @@
 @implementation SKAppDelegate
 
 + (void)load {
-    IndCalculator *ind = [IndCalculator calculatorWithIndName:@"MA"];
-    ind.params = @[@5,@10,@15];
+    IndCalculator *ind = [IndCalculator calculatorWithIndName:@"SAR"];
+    ind.params = @[@10,@2,@20];
     
     NSArray <IIndCandleStick>*candles = [SKCandleDataBuilder candles];
     
     NSArray *result = [ind calc:candles];
     
     NSLog(@"%@",result);
+    IndDataSet *dataSet = result.firstObject;
+    
+    for (NSInteger i = 0; i < dataSet.values.count; i++) {
+        NSLog(@"date: %f value: %@, color: %@",[candles[i] datetime], dataSet.values[i], dataSet.colors[i]);
+    }
+    
 }
 
 @end

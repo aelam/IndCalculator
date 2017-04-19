@@ -44,7 +44,7 @@
     if (_params != params) {
         _params = params;
         
-        if (params.count > 6) {
+        if (params.count > 7) {
             NSLog(@"参数最多能设置6个, 其他会被忽略");
         }
         _ind->m_cParamSize = _params.count;
@@ -61,10 +61,33 @@
 - (NSArray<IIndDataSet> *)calc:(NSArray<IIndCandleStick> *)items {
     NSInteger itemCount = items.count;
     CFDayMobile *cppItems = [self sticksFromIIndCandleSticks:items];
+    
     _ind->Calc(cppItems, (int)itemCount);
     
-    NSMutableArray<IIndDataSet> *results = (NSMutableArray<IIndDataSet> *)[[NSMutableArray alloc] initWithCapacity:_ind->m_cExpSize];
-    for (NSInteger dataGroupIndex = 0; dataGroupIndex < _ind->m_cExpSize; dataGroupIndex++) {
+    if (![_name isEqualToString:@"MA"]) {
+        
+        NSLog(@"param:%@\n", _params);
+        printf("================\n");
+        printf("BEGIN POSITION: \n");
+        for (int i = 0 ; i <= 6; i++) {
+            printf("%d ", _ind->m_pnFirst[i]);
+        }
+        printf("\n================\n");
+        
+        for (int i = 0 ; i < itemCount; i++) {
+            printf("date %d", cppItems[i].m_dwTime);
+            for (int j = 0; j < _ind->m_cExpSize; j++) {
+                printf(" r%d: %0.2f ", j ,cppItems[i].m_pfInd[j]);
+            }
+            printf("\n");
+        }
+        printf("\n================\n");
+    }
+    
+    NSInteger expSize = _ind->m_cExpSize;
+
+    NSMutableArray<IIndDataSet> *results = (NSMutableArray<IIndDataSet> *)[[NSMutableArray alloc] initWithCapacity:expSize];
+    for (NSInteger dataGroupIndex = 0; dataGroupIndex < expSize; dataGroupIndex++) {
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
         NSMutableArray *colors = [NSMutableArray arrayWithCapacity:itemCount];
         
@@ -72,19 +95,9 @@
         for (NSInteger dataIndex = 0; dataIndex < itemCount; dataIndex++) {
             CFDayMobile cppItem = cppItems[dataIndex];
             double value = 0;
-            if ([_name isEqualToString:@"MA"]) {
-                value = cppItem.m_pfMA[dataGroupIndex];
-                [values addObject:@(value)];
-            } else if ([_name isEqualToString:@"VOL"]) {
-                value = cppItem.m_pfVMA[dataGroupIndex];
-                [values addObject:@(value)];
-            } else if ([_name isEqualToString:@"SAR"]) {
-                value = cppItem.m_pfInd[dataGroupIndex];
-                if (dataGroupIndex == 0) {
-                    [values addObject:@(value)];
-                } else {
-                    [colors addObject:@(value)];
-                }
+            if ([_name isEqualToString:@"SAR"]) {
+                [values addObject:@(cppItem.m_pfInd[0])];
+                [colors addObject:@(cppItem.m_color)];
             } else {
                 value = cppItem.m_pfInd[dataGroupIndex];
                 [values addObject:@(value)];
@@ -99,6 +112,8 @@
         [results addObject:indDataSet];
     }
     
+    delete [] cppItems;
+    
     return results;
 }
 
@@ -107,7 +122,7 @@
     if (count == 0) {
         return nil;
     }
-    CFDayMobile *cppItems = (CFDayMobile *)malloc(sizeof(CFDayMobile) * count);
+    CFDayMobile *cppItems = new CFDayMobile[count];
     
     for (NSInteger i = 0; i < count; i++) {
         id<IIndCandleStick> item = items[i];
@@ -116,6 +131,7 @@
         cppItems[i].m_fLow = item.low;
         cppItems[i].m_fClose = item.close;
         cppItems[i].m_fVolume = item.volume;
+        cppItems[i].m_dwTime = item.datetime;
     }
     
     return cppItems;

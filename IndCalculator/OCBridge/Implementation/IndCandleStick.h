@@ -16,5 +16,6 @@
 @property (nonatomic, assign) double close;
 @property (nonatomic, assign) double low;
 @property (nonatomic, assign) double volume;
+@property (nonatomic, assign) double datetime;
 
 @end

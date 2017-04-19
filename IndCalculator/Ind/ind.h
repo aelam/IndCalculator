@@ -2,16 +2,29 @@
 // Created by sam on 3/29/17.
 //
 
-#ifndef __IND_H
-#define __IND_H
+#ifndef MYAPPLICATION_IND_H
+#define MYAPPLICATION_IND_H
 
-#include <string.h>
+#include <string>
 
-#define LOGD(...)   // 定义LOGD类型
-#define LogTrace(...)
+//#include <android/log.h>
+//#define TAG    "ind-jni" // 这个是自定义的LOG的标识
+#define LOGD(...) // __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__) // 定义LOGD类型
+//
+#define LogTrace(...)  //__android_log_print(ANDROID_LOG_DEBUG,TAG,__VA_ARGS__) // 定义LOGD类型
 
+#define __NAN NAN
+
+const char* my_test();
 typedef unsigned int DWORD;
 #define ZeroMemory(a, b) memset(a, 0, b)
+#define NANMemory(a, b) memset(a, __NAN, b)
+
+enum LineColor {
+    LineColorIncreasing = 1,
+    LineColorNetural    = 0,
+    LineColorDecreasing = -1
+};
 
 struct CFDayMobile
 {
@@ -33,10 +46,10 @@ struct CFDayMobile
     double m_fClose;
     double m_fVolume;
     double m_fAmount;
+    
+    double m_pfInd[7];
+    int    m_color;
 
-    double m_pfMA[6];
-    double m_pfVMA[6];
-    double m_pfInd[6];
 };
 
 
@@ -52,13 +65,14 @@ public:
 protected:
     virtual char GetGroup();
 
-
 public:
     char m_cParamSize;
-    short m_psParam[6];
+    short m_psParam[7];
 
-    char m_cExpSize; //返回的指标根数，最多六根，一般在calc里面设置
-    int m_pnFirst[6];
+    char m_cExpSize;     //返回的指标根数，最多六根，一般在calc里面设置
+    int m_pnFirst[7];
+    
+    int m_coloredIndIndex; // 默认-1 表示没有需要着色的线 如果>=0 通过index为对应的ind着色
 };
 
 
@@ -68,6 +82,7 @@ public:
     CInd_MA();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
+
 
 class CInd_VMA : public CInd
 {
@@ -292,8 +307,4 @@ public:
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
-
-
-#endif //__IND_H
-
-
+#endif //MYAPPLICATION_IND_H

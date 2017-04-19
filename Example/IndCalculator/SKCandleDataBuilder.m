@@ -18,10 +18,11 @@
     NSMutableArray <IIndCandleStick> *candles = (NSMutableArray <IIndCandleStick> *)[NSMutableArray array];
     for (NSArray *numbers in candleNumbers) {
         IndCandleStick *stick = [[IndCandleStick alloc] init];
-        stick.high = [numbers[0] doubleValue];
+        stick.datetime = [numbers[0] doubleValue];
         stick.open = [numbers[1] doubleValue];
-        stick.low = [numbers[2] doubleValue];
-        stick.close = [numbers[3] doubleValue];
+        stick.high = [numbers[2] doubleValue];
+        stick.low = [numbers[3] doubleValue];
+        stick.close = [numbers[4] doubleValue];
         
         [candles addObject:stick];
     }

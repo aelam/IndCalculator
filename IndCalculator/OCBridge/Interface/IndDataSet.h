@@ -13,6 +13,13 @@
 @protocol IIndCalculator;
 @protocol IIndDataSet;
 
+typedef NS_ENUM(NSInteger, IndLineType) {
+    IndLineTypeDots,      // 点 SAR
+    IndLineTypeLine,      // 线
+    IndLineTypeThinStick, // MACD
+    IndLineTypeStick      // VOL
+};
+
 @interface IndDataSet : NSObject <IIndDataSet>
 
 @property (nonatomic, assign) NSInteger beginIndex;
