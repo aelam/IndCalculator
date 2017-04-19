@@ -12,6 +12,7 @@
 #import "Factory.h"
 #import "Registrar.h"
 #import "IndDataSet.h"
+#include <string>
 
 @interface IndCalculator () {
     CInd     *_ind;
@@ -91,23 +92,27 @@
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
         NSMutableArray *colors = [NSMutableArray arrayWithCapacity:itemCount];
         
+        NSInteger coloredIndIndex = _ind->m_coloredIndIndex;
         NSInteger startIndex = _ind->m_pnFirst[dataGroupIndex];
+        
+        std::string lineName = _ind->GetIndLineName((int)dataGroupIndex);
+        NSString *dataSetName = [NSString stringWithCString:lineName.c_str()
+                                                   encoding:[NSString defaultCStringEncoding]];
+        
         for (NSInteger dataIndex = 0; dataIndex < itemCount; dataIndex++) {
             CFDayMobile cppItem = cppItems[dataIndex];
-            double value = 0;
-            if ([_name isEqualToString:@"SAR"]) {
-                [values addObject:@(cppItem.m_pfInd[0])];
-                [colors addObject:@(cppItem.m_color)];
-            } else {
-                value = cppItem.m_pfInd[dataGroupIndex];
-                [values addObject:@(value)];
-            }
+            [values addObject:@(cppItem.m_pfInd[dataGroupIndex])];
+            [colors addObject:@(cppItem.m_color)];
         }
-        
+
         IndDataSet *indDataSet = [[IndDataSet alloc] init];
         indDataSet.beginIndex = startIndex;
         indDataSet.values = values;
-        indDataSet.colors = colors;
+        indDataSet.dataSetName = dataSetName;
+        
+        if (coloredIndIndex >= 0 && dataGroupIndex == coloredIndIndex) {
+            indDataSet.colors = colors;
+        }
 
         [results addObject:indDataSet];
     }

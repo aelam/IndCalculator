@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, IndLineType) {
 @interface IndDataSet : NSObject <IIndDataSet>
 
 @property (nonatomic, assign) NSInteger beginIndex;
+@property (nonatomic, assign) NSInteger coloredIndIndex;
+@property (nonatomic,   copy) NSString  *dataSetName;
 @property (nonatomic, strong) NSArray<NSNumber *> *values;
 @property (nonatomic, strong) NSArray<NSNumber *> *colors;
 

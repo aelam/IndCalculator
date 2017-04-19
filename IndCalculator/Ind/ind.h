@@ -7,6 +7,7 @@
 
 #include <string>
 
+using namespace std;
 //#include <android/log.h>
 //#define TAG    "ind-jni" // 这个是自定义的LOG的标识
 #define LOGD(...) // __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__) // 定义LOGD类型
@@ -61,6 +62,7 @@ public:
 
 public:
     virtual void Calc(CFDayMobile* pFDay, int nNum) = 0;
+    virtual string GetIndLineName(int index);
 
 protected:
     virtual char GetGroup();
@@ -73,6 +75,9 @@ public:
     int m_pnFirst[7];
     
     int m_coloredIndIndex; // 默认-1 表示没有需要着色的线 如果>=0 通过index为对应的ind着色
+    
+protected:
+    string _indLineNames[7];
 };
 
 
@@ -94,30 +99,35 @@ public:
 class CInd_MACD : public CInd
 {
 public:
+    CInd_MACD();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
 class CInd_KDJ : public CInd
 {
 public:
+    CInd_KDJ();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
 class CInd_RSI : public CInd
 {
 public:
+    CInd_RSI();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
 class CInd_WR : public CInd
 {
 public:
+    CInd_WR();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
 class CInd_VR : public CInd
 {
 public:
+    CInd_VR();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
@@ -173,6 +183,7 @@ public:
 class CInd_OBV : public CInd
 {
 public:
+    CInd_OBV();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
@@ -180,6 +191,7 @@ public:
 class CInd_ASI : public CInd
 {
 public:
+    CInd_ASI();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
 
