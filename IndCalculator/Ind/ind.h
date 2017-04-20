@@ -7,7 +7,7 @@
 
 #include <string>
 
-using namespace std;
+//using namespace std;
 //#include <android/log.h>
 //#define TAG    "ind-jni" // 这个是自定义的LOG的标识
 #define LOGD(...) // __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__) // 定义LOGD类型
@@ -19,7 +19,6 @@ using namespace std;
 const char* my_test();
 typedef unsigned int DWORD;
 #define ZeroMemory(a, b) memset(a, 0, b)
-#define NANMemory(a, b) memset(a, __NAN, b)
 
 enum LineColor {
     LineColorIncreasing = 1,
@@ -46,10 +45,10 @@ struct CFDayMobile
     double m_fLow;
     double m_fClose;
     double m_fVolume;
-    double m_fAmount;
+    //double m_fAmount;
     
     double m_pfInd[7];
-    int    m_color;
+    double m_color;
 
 };
 
@@ -62,8 +61,8 @@ public:
 
 public:
     virtual void Calc(CFDayMobile* pFDay, int nNum) = 0;
-    virtual string GetIndLineName(int index);
-
+    virtual std::string GetIndLineName(int index);
+    
 protected:
     virtual char GetGroup();
 
@@ -73,11 +72,11 @@ public:
 
     char m_cExpSize;     //返回的指标根数，最多六根，一般在calc里面设置
     int m_pnFirst[7];
-    
     int m_coloredIndIndex; // 默认-1 表示没有需要着色的线 如果>=0 通过index为对应的ind着色
     
 protected:
-    string _indLineNames[7];
+//    std::string _indParamNames[7]; // TODO
+    std::string _indOutlineNames[7];
 };
 
 
