@@ -20,6 +20,8 @@ const char* my_test();
 typedef unsigned int DWORD;
 #define ZeroMemory(a, b) memset(a, 0, b)
 
+#define MAX_PARAM_COUNT 7
+
 enum LineColor {
     LineColorIncreasing = 1,
     LineColorNetural    = 0,
@@ -47,7 +49,7 @@ struct CFDayMobile
     double m_fVolume;
     //double m_fAmount;
     
-    double m_pfInd[7];
+    double m_pfInd[MAX_PARAM_COUNT];
     double m_color;
 
 };
@@ -61,22 +63,25 @@ public:
 
 public:
     virtual void Calc(CFDayMobile* pFDay, int nNum) = 0;
-    virtual std::string GetIndLineName(int index);
+    virtual std::string GetOutlineName(int index);   // 输出线名
+    virtual std::string GetParamName(int index);     // 输入参数名
+    virtual int GetColoredIndIndex();
+    virtual int GetOutlineCount();
+    virtual int GetBeginIndex(int outlineIndex);
     
-protected:
-    virtual char GetGroup();
+    virtual void SetParamSize(char size);
+    virtual void SetParam(short p, int index);
+    virtual short GetParam(int index);
 
-public:
+protected:
     char m_cParamSize;
-    short m_psParam[7];
+    short m_psParam[MAX_PARAM_COUNT];
 
     char m_cExpSize;     //返回的指标根数，最多六根，一般在calc里面设置
-    int m_pnFirst[7];
+    int m_pnFirst[MAX_PARAM_COUNT];
     int m_coloredIndIndex; // 默认-1 表示没有需要着色的线 如果>=0 通过index为对应的ind着色
-    
-protected:
-//    std::string _indParamNames[7]; // TODO
-    std::string _indOutlineNames[7];
+    std::string _indParamNames[MAX_PARAM_COUNT]; // TODO
+    std::string _indOutlineNames[MAX_PARAM_COUNT];
 };
 
 

@@ -46,11 +46,12 @@
         _params = params;
         
         if (params.count > 7) {
-            NSLog(@"参数最多能设置6个, 其他会被忽略");
+            NSLog(@"参数最多能设置7个, 其他会被忽略");
         }
-        _ind->m_cParamSize = _params.count;
-        for (NSInteger i = 0; i < params.count; i++) {
-            _ind->m_psParam[i] = [_params[i] shortValue];
+        
+        _ind->SetParamSize((char)_params.count);
+        for (int i = 0; i < params.count; i++) {
+            _ind->SetParam([_params[i] shortValue], i);
         }
     }
 }
@@ -71,13 +72,13 @@
         printf("================\n");
         printf("BEGIN POSITION: \n");
         for (int i = 0 ; i <= 6; i++) {
-            printf("%d ", _ind->m_pnFirst[i]);
+            printf("%d ", _ind->GetBeginIndex(i));
         }
         printf("\n================\n");
         
         for (int i = 0 ; i < itemCount; i++) {
             printf("date %d", cppItems[i].m_dwTime);
-            for (int j = 0; j < _ind->m_cExpSize; j++) {
+            for (int j = 0; j < _ind->GetOutlineCount(); j++) {
                 printf(" r%d: %0.2f ", j ,cppItems[i].m_pfInd[j]);
             }
             printf("\n");
@@ -85,17 +86,16 @@
         printf("\n================\n");
     }
     
-    NSInteger expSize = _ind->m_cExpSize;
+    NSInteger expSize = _ind->GetOutlineCount();
 
     NSMutableArray<IIndDataSet> *results = (NSMutableArray<IIndDataSet> *)[[NSMutableArray alloc] initWithCapacity:expSize];
     for (NSInteger dataGroupIndex = 0; dataGroupIndex < expSize; dataGroupIndex++) {
         NSMutableArray *values = [NSMutableArray arrayWithCapacity:itemCount];
         NSMutableArray *colors = [NSMutableArray arrayWithCapacity:itemCount];
         
-        NSInteger coloredIndIndex = _ind->m_coloredIndIndex;
-        NSInteger startIndex = _ind->m_pnFirst[dataGroupIndex];
-        
-        std::string lineName = _ind->GetIndLineName((int)dataGroupIndex);
+        NSInteger coloredIndIndex = _ind->GetColoredIndIndex();
+        NSInteger startIndex = _ind->GetBeginIndex((int)dataGroupIndex);
+        std::string lineName = _ind->GetOutlineName((int)dataGroupIndex);
         NSString *dataSetName = [NSString stringWithCString:lineName.c_str()
                                                    encoding:[NSString defaultCStringEncoding]];
         

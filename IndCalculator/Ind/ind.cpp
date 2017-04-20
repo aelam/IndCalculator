@@ -250,10 +250,10 @@ void Calc_SUM(double* pfSum, double* pfValue, int nValue, short sParam, int nSta
 CInd::CInd()
 {
     m_cParamSize = 0;
-    ZeroMemory(m_psParam, 7*sizeof(short));
+    ZeroMemory(m_psParam, MAX_PARAM_COUNT * sizeof(short));
 
     m_cExpSize = 0;
-    ZeroMemory(m_pnFirst, 7*sizeof(int));
+    ZeroMemory(m_pnFirst, MAX_PARAM_COUNT * sizeof(int));
     
     m_coloredIndIndex = -1;  
 }
@@ -263,18 +263,49 @@ void CInd::Calc(CFDayMobile* pFDay, int nNum)
 
 }
 
-std::string CInd::GetIndLineName(int index) {
+std::string CInd::GetOutlineName(int index) {
     return _indOutlineNames[index];
 }
 
-char CInd::GetGroup()
-{
-    return 10;
+std::string CInd::GetParamName(int index) {
+    return _indParamNames[index];
 }
+
+int CInd::GetColoredIndIndex() {
+    return m_coloredIndIndex;
+}
+
+int CInd::GetOutlineCount() {
+    return m_cExpSize;
+}
+
+int CInd::GetBeginIndex(int outlineIndex) {
+    return m_pnFirst[outlineIndex];
+}
+
+void CInd::SetParamSize(char size) {
+    m_cParamSize = size;
+}
+
+void CInd::SetParam(short p, int index) {
+    m_psParam[index] = p;
+}
+
+short CInd::GetParam(int index) {
+    return m_psParam[index];
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_MA::CInd_MA() : CInd()
 {
+    _indParamNames[0] = "P1";
+    _indParamNames[1] = "P2";
+    _indParamNames[2] = "P3";
+    _indParamNames[3] = "P4";
+    _indParamNames[4] = "P5";
+    _indParamNames[5] = "P6";
+
     _indOutlineNames[0] = "M1";
     _indOutlineNames[1] = "M2";
     _indOutlineNames[2] = "M3";
@@ -326,6 +357,13 @@ void CInd_MA::Calc(CFDayMobile* pFDay, int nNum)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_VMA::CInd_VMA() : CInd()
 {
+    _indParamNames[0] = "M1";
+    _indParamNames[1] = "M2";
+    _indParamNames[2] = "M3";
+    _indParamNames[3] = "M4";
+    _indParamNames[4] = "M5";
+    _indParamNames[5] = "M6";
+
     _indOutlineNames[0] = "VOLUME";
     _indOutlineNames[1] = "M1";
     _indOutlineNames[2] = "M2";
@@ -396,6 +434,10 @@ void CInd_VMA::Calc(CFDayMobile* pFDay, int nNum)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_MACD::CInd_MACD() {
     // DIF", "DEA", "MACD"
+    _indParamNames[0] = "LONG";
+    _indParamNames[1] = "SHORT";
+    _indParamNames[2] = "M";
+    
     _indOutlineNames[0] = "DIF";
     _indOutlineNames[1] = "DEA";
     _indOutlineNames[2] = "MACD";
@@ -449,6 +491,11 @@ void CInd_MACD::Calc(CFDayMobile* pFDay, int nNum)
 //D : SMA(K,M2,1);
 //J : 3*K-2*D;
 CInd_KDJ::CInd_KDJ() {
+    
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M1";
+    _indParamNames[2] = "M2";
+
     _indOutlineNames[0] = "K";
     _indOutlineNames[1] = "D";
     _indOutlineNames[2] = "J";
@@ -516,6 +563,10 @@ void CInd_KDJ::Calc(CFDayMobile* pFDay, int nNum)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_RSI::CInd_RSI() {
+    _indParamNames[0] = "N1";
+    _indParamNames[1] = "N2";
+    _indParamNames[2] = "N3";
+    
     _indOutlineNames[0] = "RSI1";
     _indOutlineNames[1] = "RSI2";
     _indOutlineNames[2] = "RSI3";
@@ -581,6 +632,10 @@ void CInd_RSI::Calc(CFDayMobile* pFDay, int nNum)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_WR::CInd_WR() {
+    _indParamNames[0] = "N1";
+    _indParamNames[1] = "N2";
+    _indParamNames[2] = "N3";
+
     _indOutlineNames[0] = "WR";
 }
 
@@ -613,6 +668,8 @@ void CInd_WR::Calc(CFDayMobile* pFDay, int nNum)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 CInd_VR::CInd_VR() {
+    _indParamNames[0] = "N";
+
     _indOutlineNames[0] = "VR";
 }
 
@@ -677,6 +734,10 @@ void CInd_VR::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_DMI::CInd_DMI() : CInd()
 {
+    
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M";
+
     _indOutlineNames[0] = "PDI";
     _indOutlineNames[1] = "MDI";
     _indOutlineNames[2] = "ADX";
@@ -801,6 +862,10 @@ void CInd_DMI::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_DMA::CInd_DMA() : CInd()
 {
+    _indParamNames[0] = "LONG";
+    _indParamNames[1] = "SHORT";
+    _indParamNames[2] = "M";
+
     _indOutlineNames[0] = "DDD";
     _indOutlineNames[1] = "AMA";
 
@@ -885,7 +950,10 @@ void CInd_DMA::Calc(CFDayMobile* pFDay, int nNum)
 
 //////////////////////////////////////////////////////////////////////////
 CInd_TRIX::CInd_TRIX() : CInd()
-{
+{    
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M";
+
     _indOutlineNames[0] = "TRIX";
     _indOutlineNames[1] = "TRMA";
 
@@ -945,6 +1013,8 @@ void CInd_TRIX::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_BRAR::CInd_BRAR() : CInd()
 {
+    _indParamNames[0] = "N";
+
     _indOutlineNames[0] = "AR";
     _indOutlineNames[1] = "BR";
 
@@ -1049,6 +1119,11 @@ void CInd_BRAR::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_CR::CInd_CR() : CInd()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M1";
+    _indParamNames[2] = "M2";
+    _indParamNames[3] = "M3";
+
     _indOutlineNames[0] = "CR";
     _indOutlineNames[1] = "MA1";
     _indOutlineNames[2] = "MA2";
@@ -1059,6 +1134,12 @@ CInd_CR::CInd_CR() : CInd()
     m_psParam[2] = 10;
     m_psParam[3] = 20;
 }
+
+//TODO:
+//int CInd_CR::GetOutlineCount() {
+//    return 4;
+//}
+
 //带状能量线
 void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
 {
@@ -1303,6 +1384,9 @@ void CInd_ASI::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_EMV::CInd_EMV() : CInd()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "N1";
+
     _indOutlineNames[0] = "EMV";
     _indOutlineNames[1] = "EMVA";
 
@@ -1385,6 +1469,8 @@ void CInd_EMV::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_CCI::CInd_CCI() : CInd()
 {
+    _indParamNames[0] = "N";
+
     _indOutlineNames[0] = "CCI";
     
     m_psParam[0] = 14;
@@ -1447,6 +1533,9 @@ void CInd_CCI::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_ROC::CInd_ROC() : CInd()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M";
+
     _indOutlineNames[0] = "ROC";
     _indOutlineNames[1] = "ROCMA";
 
@@ -1499,6 +1588,9 @@ void CInd_ROC::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_MTM::CInd_MTM() : CInd()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "N1";
+
     _indOutlineNames[0] = "MTM";
     _indOutlineNames[1] = "MTMMA";
 
@@ -1604,6 +1696,11 @@ void CInd_PSY::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_BOLL::CInd_BOLL() : CInd()
 {
+    
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "STEP";
+    _indParamNames[2] = "MAXP";
+
     _indOutlineNames[0] = "MID";
     _indOutlineNames[1] = "UPPER";
     _indOutlineNames[2] = "LOWER";
@@ -1676,6 +1773,9 @@ void CInd_BOLL::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////////////////////////////////////////////
 CInd_SAR::CInd_SAR() : CInd()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "P";
+
     _indOutlineNames[0] = "BB";
 
     m_psParam[0] = 10;
@@ -1896,6 +1996,11 @@ void CInd_EMA::Calc(CFDayMobile* pFDay, int nNum)
 
 CInd_SLOWKD::CInd_SLOWKD()
 {
+    _indParamNames[0] = "N";
+    _indParamNames[1] = "M1";
+    _indParamNames[2] = "M2";
+    _indParamNames[3] = "M3";
+
     _indOutlineNames[0] = "K";
     _indOutlineNames[1] = "D";
 
