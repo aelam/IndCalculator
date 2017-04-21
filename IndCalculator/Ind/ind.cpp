@@ -306,12 +306,12 @@ CInd_MA::CInd_MA() : CInd()
     _indParamNames[4] = "P5";
     _indParamNames[5] = "P6";
 
-    _indOutlineNames[0] = "M1";
-    _indOutlineNames[1] = "M2";
-    _indOutlineNames[2] = "M3";
-    _indOutlineNames[3] = "M4";
-    _indOutlineNames[4] = "M5";
-    _indOutlineNames[5] = "M6";
+    _indOutlineNames[0] = "MA1";
+    _indOutlineNames[1] = "MA2";
+    _indOutlineNames[2] = "MA3";
+    _indOutlineNames[3] = "MA4";
+    _indOutlineNames[4] = "MA5";
+    _indOutlineNames[5] = "MA6";
     
     m_psParam[0] = 5;
     m_psParam[1] = 10;
@@ -365,12 +365,12 @@ CInd_VMA::CInd_VMA() : CInd()
     _indParamNames[5] = "M6";
 
     _indOutlineNames[0] = "VOLUME";
-    _indOutlineNames[1] = "M1";
-    _indOutlineNames[2] = "M2";
-    _indOutlineNames[3] = "M3";
-    _indOutlineNames[4] = "M4";
-    _indOutlineNames[5] = "M5";
-    _indOutlineNames[6] = "M6";
+    _indOutlineNames[1] = "MA1";
+    _indOutlineNames[2] = "MA2";
+    _indOutlineNames[3] = "MA3";
+    _indOutlineNames[4] = "MA4";
+    _indOutlineNames[5] = "MA5";
+    _indOutlineNames[6] = "MA6";
     
     m_psParam[0] = 5;
     m_psParam[1] = 10;
@@ -438,7 +438,7 @@ CInd_MACD::CInd_MACD() {
     _indParamNames[1] = "SHORT";
     _indParamNames[2] = "M";
     
-    _indOutlineNames[0] = "DIF";
+    _indOutlineNames[0] = "DIFF";
     _indOutlineNames[1] = "DEA";
     _indOutlineNames[2] = "MACD";
 }
@@ -866,7 +866,7 @@ CInd_DMA::CInd_DMA() : CInd()
     _indParamNames[1] = "SHORT";
     _indParamNames[2] = "M";
 
-    _indOutlineNames[0] = "DDD";
+    _indOutlineNames[0] = "DDA";
     _indOutlineNames[1] = "AMA";
 
     m_psParam[0] = 10;
