@@ -1170,11 +1170,11 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     int nRefIndex2 = int(nM2/2.5+1);//5
     int nRefIndex3 = int(nM3/2.5+1);//9
 
-    //m_pnFirst[0] = nN;//26
+//    m_pnFirst[0] = nN;//26
     m_pnFirst[0] = 1;//26
     m_pnFirst[1] = m_pnFirst[0] + nM1 + nRefIndex1 - 1;
-    m_pnFirst[2] = m_pnFirst[1] + nM2 - nRefIndex1;
-    m_pnFirst[3] = m_pnFirst[2] + nM2 + nRefIndex2 - 1;
+    m_pnFirst[2] = m_pnFirst[0] + nM2 + nRefIndex2 - 1;
+    m_pnFirst[3] = m_pnFirst[0] + nM3 + nRefIndex3 - 1;
 
     for (int i=0; i<nNum; i++)
         pFDay[i].m_pfInd[4] = (pFDay[i].m_fHigh + pFDay[i].m_fLow + pFDay[i].m_fClose) / 3;
@@ -1192,9 +1192,13 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
                 pFDay[i].m_pfInd[3] += Max(0, pFDay[j-1].m_pfInd[4] - pFDay[j].m_fLow);
             }
             if(i == 0)
-                pFDay[i].m_pfInd[0] = 0;
-            else
+                pFDay[i].m_pfInd[0] = __NAN;
+            else {
                 pFDay[i].m_pfInd[0] = pFDay[i].m_pfInd[2] / pFDay[i].m_pfInd[3] * 100;
+                if (isinf(pFDay[i].m_pfInd[0])) {
+                    pFDay[i].m_pfInd[0] = __NAN;
+                }
+            }
         }
         else
         {
@@ -1216,13 +1220,19 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[4] = 0.0;
+            pFDay[i].m_pfInd[4] = __NAN;
         else
         {
-            pFDay[i].m_pfInd[4] = 0.0;
-            for (int j=i-nM1+1; j<=i; j++)
-                pFDay[i].m_pfInd[4] += pFDay[j].m_pfInd[0];
-            pFDay[i].m_pfInd[4] /= nM1;
+            double sum = __NAN;
+            for (int j=i-nM1+1; j<=i; j++) {
+                if (isinf(pFDay[j].m_pfInd[0]) || isnan(pFDay[j].m_pfInd[0])) {
+                    continue;
+                } else if (isnan(sum)) {
+                    sum = 0;
+                }
+                sum += pFDay[j].m_pfInd[0];
+            }
+            pFDay[i].m_pfInd[4] = sum/nM1;
         }
     }
 
@@ -1231,7 +1241,7 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[1] = 0.0;
+            pFDay[i].m_pfInd[1] = __NAN;
         else
             pFDay[i].m_pfInd[1] = pFDay[i-nRefIndex1].m_pfInd[4];
     }
@@ -1241,13 +1251,19 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[4] = 0.0;
+            pFDay[i].m_pfInd[4] = __NAN;
         else
         {
-            pFDay[i].m_pfInd[4] = 0.0;
-            for (int j=i-nM2+1; j<=i; j++)
-                pFDay[i].m_pfInd[4] += pFDay[j].m_pfInd[0];
-            pFDay[i].m_pfInd[4] /= nM2;
+            double sum = __NAN;
+            for (int j=i-nM2+1; j<=i; j++) {
+                if (isinf(pFDay[j].m_pfInd[0]) || isnan(pFDay[j].m_pfInd[0])) {
+                    continue;
+                } else if (isnan(sum)) {
+                    sum = 0;
+                }
+                sum += pFDay[j].m_pfInd[0];
+            }
+            pFDay[i].m_pfInd[4] = sum/nM2;
         }
     }
 
@@ -1256,7 +1272,7 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[2] = 0.0;
+            pFDay[i].m_pfInd[2] = __NAN;
         else
             pFDay[i].m_pfInd[2] = pFDay[i-nRefIndex2].m_pfInd[4];
     }
@@ -1266,13 +1282,19 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[4] = 0.0;
+            pFDay[i].m_pfInd[4] = __NAN;
         else
         {
-            pFDay[i].m_pfInd[4] = 0.0;
-            for (int j=i-nM3+1; j<=i; j++)
-                pFDay[i].m_pfInd[4] += pFDay[j].m_pfInd[0];
-            pFDay[i].m_pfInd[4] /= nM3;
+            double sum = __NAN;
+            for (int j=i-nM3+1; j<=i; j++) {
+                if (isinf(pFDay[j].m_pfInd[0]) || isnan(pFDay[j].m_pfInd[0])) {
+                    continue;
+                } else if (isnan(sum)) {
+                    sum = 0;
+                }
+                sum += pFDay[j].m_pfInd[0];
+            }
+            pFDay[i].m_pfInd[4] = sum/nM3;
         }
     }
 
@@ -1281,7 +1303,7 @@ void CInd_CR::Calc(CFDayMobile* pFDay, int nNum)
     for (int i=0; i<nNum; i++)
     {
         if (i < nSplit)
-            pFDay[i].m_pfInd[3] = 0.0;
+            pFDay[i].m_pfInd[3] = __NAN;
         else
             pFDay[i].m_pfInd[3] = pFDay[i-nRefIndex3].m_pfInd[4];
     }
