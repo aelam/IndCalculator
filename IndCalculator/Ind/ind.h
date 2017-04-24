@@ -47,8 +47,9 @@ struct CFDayMobile
     double m_fLow;
     double m_fClose;
     double m_fVolume;
-    //double m_fAmount;
-    
+    double m_fAmount;
+    double m_fLTG;
+
     double m_pfInd[MAX_PARAM_COUNT];
     double m_color;
 
@@ -322,5 +323,14 @@ public:
     CInd_BIAS();
     virtual void Calc(CFDayMobile* pFDay, int nNum);
 };
+
+// 不接受输入参数
+class CInd_FSL : public CInd
+{
+public:
+    CInd_FSL();
+    virtual void Calc(CFDayMobile* pFDay, int nNum);
+};
+
 
 #endif //MYAPPLICATION_IND_H

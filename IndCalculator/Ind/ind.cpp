@@ -19,6 +19,25 @@ typedef bool BOOL;
 
 #define EPS (1e-5)
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void __SUM(double *input, int count, int period, double *output) {
+    for (int i = 0; i < count; i++) {
+        int sum = __NAN;
+        for (int j = Max(i - period, 0); j <= i; j++) {
+            if (j < 0) {
+                continue;
+            }
+            if (!isnan(input[j])) {
+                sum = 0;
+            }
+            
+            sum += input[j];
+        }
+        
+        output[i] = sum;
+    }
+}
+
 void Cal_VMAColor(CFDayMobile* pDay, int nDay) {
     if (pDay == NULL || nDay <= 0) return;
     for (int i = 0; i < nDay; i++) {
@@ -549,7 +568,7 @@ void CInd_KDJ::Calc(CFDayMobile* pFDay, int nNum)
         {
             pFDay[i].m_pfInd[0] = pfK[i];
             pFDay[i].m_pfInd[1] = pfD[i];
-            pFDay[i].m_pfInd[2] = 3*pfD[i] - 2*pfK[i];
+            pFDay[i].m_pfInd[2] = 3*pfK[i] - 2*pfD[i];
         }
     }
 
@@ -1716,12 +1735,14 @@ void CInd_PSY::Calc(CFDayMobile* pFDay, int nNum)
 }
 
 //////////////////////////////////////////////////////////////////////////
+// DIS:=STDP(CLOSE,SD);
+// MID:MA(CLOSE,SD),COLORFFAEC9;
+// UPPER:MID+WIDTH*DIS,COLORFFC90E;
+// LOWER:MID-WIDTH*DIS,COLOR0CAEE6;
 CInd_BOLL::CInd_BOLL() : CInd()
 {
-    
     _indParamNames[0] = "N";
-    _indParamNames[1] = "STEP";
-    _indParamNames[2] = "MAXP";
+    _indParamNames[1] = "P";
 
     _indOutlineNames[0] = "MID";
     _indOutlineNames[1] = "UPPER";
@@ -1796,13 +1817,15 @@ void CInd_BOLL::Calc(CFDayMobile* pFDay, int nNum)
 CInd_SAR::CInd_SAR() : CInd()
 {
     _indParamNames[0] = "N";
-    _indParamNames[1] = "P";
-
-    _indOutlineNames[0] = "BB";
+    _indParamNames[1] = "STEP";
+    _indParamNames[2] = "MAXP";
 
     m_psParam[0] = 10;
     m_psParam[1] = 2;
     m_psParam[2] = 20;
+    
+    _indOutlineNames[0] = "BB";
+
 }
 
 void CInd_SAR::Calc(CFDayMobile* pFDay, int nNum)
@@ -2006,7 +2029,6 @@ void CInd_EMA::Calc(CFDayMobile* pFDay, int nNum)
             else
             {
                 pFDay[i].m_pfInd[c] = (pFDay[i-1].m_pfInd[c]*(sParam-1)+pFDay[i].m_fClose*2)/(sParam+1);
-
             }
         }
     }
@@ -2238,3 +2260,66 @@ void CInd_BIAS::Calc(CFDayMobile* pFDay, int nNum)
         delete [] pfMA_Close3;
 
 }
+
+//////////////////////////////////
+// SWL:(EMA(CLOSE,5)*7+EMA(CLOSE,10)*3)/10;
+// SWS:DMA(EMA(CLOSE,12),MAX(1,100*(SUM(VOL,5)/(3*CAPITAL))));
+CInd_FSL::CInd_FSL() {
+    _indOutlineNames[0] = "SWL";
+    _indOutlineNames[1] = "SWS";
+    
+    m_psParam[0] = 1;
+    m_psParam[1] = 3;
+    m_psParam[2] = 4;
+}
+
+void CInd_FSL::Calc(CFDayMobile* pFDay, int nNum) {
+    
+    m_cExpSize = 2;
+    m_pnFirst[0] = 0;
+    m_pnFirst[1] = 0;
+    
+    if (pFDay == NULL || nNum <= 0) return;
+    
+    //{SWL
+    pFDay[0].m_pfInd[2] = pFDay[0].m_fClose;
+    pFDay[0].m_pfInd[3] = pFDay[0].m_fClose;
+    for (int i=1; i<nNum; i++)
+    {
+        pFDay[i].m_pfInd[2] = (pFDay[i-1].m_pfInd[2] * (5 - 1) + pFDay[i].m_fClose*2) / (5 + 1);
+        pFDay[i].m_pfInd[3] = (pFDay[i-1].m_pfInd[3] * (10 - 1) + pFDay[i].m_fClose*2) / (10 + 1);
+    }
+    
+    for (int i=0; i<nNum; i++)
+        pFDay[i].m_pfInd[0] = (pFDay[i].m_pfInd[2] * 7 + pFDay[i].m_pfInd[3] * 3) / 10;
+    //}
+    
+    //{SWS
+    pFDay[0].m_pfInd[2] = pFDay[0].m_fClose;
+    for (int i=1; i<nNum; i++)
+        pFDay[i].m_pfInd[2] = (pFDay[i-1].m_pfInd[2] * (12 - 1) + pFDay[i].m_fClose*2) / (12 + 1);
+    
+    for (int i=0; i<nNum; i++)
+    {
+        if (i < 5-1)
+            pFDay[i].m_pfInd[3] = 0.0;
+        else
+        {
+            pFDay[i].m_pfInd[3] = 0.0;
+            for (int j=i-5+1; j<=i; j++)
+                pFDay[i].m_pfInd[3] += pFDay[j].m_fVolume;
+        }
+        
+        pFDay[i].m_pfInd[3] = Max(1, 100 * pFDay[i].m_pfInd[3] / (3 * pFDay[i].m_fLTG));
+    }
+    
+    for (int i=0; i<nNum; i++)
+    {
+        if (i < 1)
+            pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[0];
+        else
+            pFDay[i].m_pfInd[1] = pFDay[i].m_pfInd[3]*pFDay[i].m_pfInd[2]+(1-pFDay[i].m_pfInd[3])*pFDay[i-1].m_pfInd[1];
+    }
+    //}
+};
+
