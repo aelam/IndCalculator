@@ -65,7 +65,8 @@
     CFDayMobile *cppItems = [self sticksFromIIndCandleSticks:items];
     
     _ind->Calc(cppItems, (int)itemCount);
-    
+
+#if 0
     if (![_name isEqualToString:@"MA"]) {
         
         NSLog(@"param:%@\n", _params);
@@ -85,6 +86,7 @@
         }
         printf("\n================\n");
     }
+#endif
     
     NSInteger expSize = _ind->GetOutlineCount();
 
