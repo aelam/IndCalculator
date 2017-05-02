@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
     OC桥接, 以及数据协议
                        DESC
 
-  s.homepage         = 'https://github.com/aelam/IndCalculator'
+  s.homepage         = 'http://ph.benemind.com/diffusion/95'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'aelam' => 'wanglun02@gmail.com' }
-  s.source           = { :git => 'https://github.com/aelam/IndCalculator.git', :tag => s.version.to_s }
+  s.source           = { :git => 'http://ph.benemind.com/diffusion/95/indcalculator.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '7.0'
 #s.xcconfig = {'CLANG_CXX_LANGUAGE_STANDARD' => 'c++14' }
