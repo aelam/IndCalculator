@@ -2277,6 +2277,7 @@ void CInd_BIAS::Calc(CFDayMobile* pFDay, int nNum)
 //////////////////////////////////
 // SWL:(EMA(CLOSE,5)*7+EMA(CLOSE,10)*3)/10;
 // SWS:DMA(EMA(CLOSE,12),MAX(1,100*(SUM(VOL,5)/(3*CAPITAL))));
+// **NOTE: 这里VOL返回的数据单位是股, 计算SWS的时候不要乘以100**
 CInd_FSL::CInd_FSL() {
     _indOutlineNames[0] = "SWL";
     _indOutlineNames[1] = "SWS";
@@ -2299,9 +2300,10 @@ void CInd_FSL::Calc(CFDayMobile* pFDay, int nNum) {
         pFDay[i].m_pfInd[3] = (pFDay[i-1].m_pfInd[3] * (10 - 1) + pFDay[i].m_fClose*2) / (10 + 1);
     }
     
-    for (int i=0; i<nNum; i++)
+    // **NOTE: 这里VOL返回的数据单位是股, 计算SWS的时候不要乘以100**
+    for (int i=0; i<nNum; i++) {
         pFDay[i].m_pfInd[0] = (pFDay[i].m_pfInd[2] * 7 + pFDay[i].m_pfInd[3] * 3) / 10;
-    //}
+    }
     
     //{SWS
     pFDay[0].m_pfInd[2] = pFDay[0].m_fClose;
@@ -2319,7 +2321,7 @@ void CInd_FSL::Calc(CFDayMobile* pFDay, int nNum) {
                 pFDay[i].m_pfInd[3] += pFDay[j].m_fVolume;
         }
         
-        pFDay[i].m_pfInd[3] = Max(1, 100 * pFDay[i].m_pfInd[3] / (3 * pFDay[i].m_fLTG));
+        pFDay[i].m_pfInd[3] = Max(1, pFDay[i].m_pfInd[3] / (3 * pFDay[i].m_fLTG));
     }
     
     for (int i=0; i<nNum; i++)
