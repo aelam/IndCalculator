@@ -2280,10 +2280,6 @@ void CInd_BIAS::Calc(CFDayMobile* pFDay, int nNum)
 CInd_FSL::CInd_FSL() {
     _indOutlineNames[0] = "SWL";
     _indOutlineNames[1] = "SWS";
-    
-    m_psParam[0] = 1;
-    m_psParam[1] = 3;
-    m_psParam[2] = 4;
 }
 
 void CInd_FSL::Calc(CFDayMobile* pFDay, int nNum) {

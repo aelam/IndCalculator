@@ -139,6 +139,8 @@
         cppItems[i].m_fClose = item.close;
         cppItems[i].m_fVolume = item.volume;
         cppItems[i].m_dwTime = item.datetime;
+        cppItems[i].m_fLTG = item.shares;
+  
     }
     
     return cppItems;

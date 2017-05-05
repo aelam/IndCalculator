@@ -17,5 +17,6 @@
 @property (nonatomic, assign) double low;
 @property (nonatomic, assign) double volume;
 @property (nonatomic, assign) double datetime;
+@property (nonatomic, assign) double shares;// 流通股
 
 @end
